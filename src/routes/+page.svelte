@@ -31,6 +31,9 @@
 	import HeroL10Impact from '$lib/components/HeroL10Impact.svelte';
 	import HeroL10Trailer from '$lib/components/HeroL10Trailer.svelte';
 	import HeroL10Shatter from '$lib/components/HeroL10Shatter.svelte';
+	import TenUniverses from '$lib/components/TenUniverses.svelte';
+	import TradingUniverses from '$lib/components/TradingUniverses.svelte';
+	import AbsoluteMaximum from '$lib/components/AbsoluteMaximum.svelte';
 </script>
 
 <main>
@@ -66,6 +69,9 @@
 	<HeroL10Impact />
 	<HeroL10Trailer />
 	<HeroL10Shatter />
+	<TenUniverses />
+	<TradingUniverses />
+	<AbsoluteMaximum />
 </main>
 
 <style>
