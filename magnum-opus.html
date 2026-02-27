@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAGNUM OPUS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;700&family=Anton&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow-x:hidden;cursor:crosshair}
+body{color:#fff;font-family:'JetBrains Mono',monospace}
+.S{position:relative;width:100%;height:100vh;overflow:hidden}
+.S canvas{position:absolute;inset:0}
+.z1{z-index:1}.z2{z-index:2}.z3{z-index:3}.z4{z-index:4}
+.C{position:relative;z-index:20;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;pointer-events:none}
+.F{position:absolute;inset:0;z-index:30;pointer-events:none;opacity:0}
+.BK{position:absolute;inset:0;z-index:35;pointer-events:none;background:#000;opacity:0}
+.T{font-family:'Anton',sans-serif;font-size:clamp(4rem,15vw,14rem);line-height:.82;opacity:0;letter-spacing:-.01em}
+.U{font-family:'Orbitron',sans-serif;font-size:clamp(.4rem,1vw,.65rem);letter-spacing:.8em;opacity:0;margin-top:15px}
+.V{font-size:.45rem;letter-spacing:.4em;opacity:0;margin-top:25px}
+.L{position:absolute;top:20px;left:25px;z-index:40;font-size:.38rem;letter-spacing:.7em;text-transform:uppercase;opacity:0}
+.R{position:absolute;top:20px;right:25px;z-index:40;font-size:.35rem;letter-spacing:.3em;opacity:0;text-align:right}
+</style>
+</head>
+<body>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const W=()=>window.innerWidth,H=()=>window.innerHeight;
+let MX=W()/2,MY=H()/2;
+document.addEventListener('mousemove',e=>{MX=e.clientX;MY=e.clientY});
+function shake(el,n,d){const s=Math.ceil(d/.016);for(let i=0;i<s;i++){const f=Math.pow(1-i/s,1.5);gsap.set(el,{x:(Math.random()-.5)*n*f,y:(Math.random()-.5)*n*f*.6,delay:i*.016})}gsap.set(el,{x:0,y:0,delay:s*.016})}
+</script>
+
+<!-- ══════════════════════════════════════════════════════════
+     1. GENESIS — Big bang creation from nothing.
+     Black → single point → EXPLOSION → universe born.
+     Perspective: FIRST PERSON — you're at the center.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s1">
+<canvas class="z1" id="s1a"></canvas><canvas class="z2" id="s1b"></canvas><canvas class="z3" id="s1c"></canvas>
+<div class="F" id="s1f" style="background:radial-gradient(circle,#fff,rgba(255,200,100,.6) 30%,transparent 60%)"></div>
+<div class="BK" id="s1bk"></div>
+<div class="C">
+  <h1 class="T" id="s1t" style="background:linear-gradient(180deg,#fff,#ffd700,#ff6600);-webkit-background-clip:text;background-clip:text;color:transparent">GENESIS</h1>
+  <p class="U" id="s1u" style="color:rgba(255,200,100,.6)">IN THE BEGINNING, THERE WAS THE CHART</p>
+</div>
+<div class="L" id="s1l" style="color:#ffd700">01 — CREATION</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     2. TSUNAMI — Side view. Massive wave of green candles
+     building, cresting, CRASHING across screen.
+     Perspective: SIDE SCROLL — wave moves left to right.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s2">
+<canvas class="z1" id="s2a"></canvas><canvas class="z2" id="s2b"></canvas><canvas class="z3" id="s2c"></canvas>
+<div class="F" id="s2f" style="background:linear-gradient(90deg,transparent,rgba(0,255,136,.4),transparent)"></div>
+<div class="C">
+  <h1 class="T" id="s2t" style="color:#00ff88;text-shadow:0 0 80px rgba(0,255,136,.5),0 0 200px rgba(0,200,100,.2)">TSUNAMI</h1>
+  <p class="U" id="s2u" style="color:rgba(0,255,136,.5)">THE WAVE THAT DROWNS THE SHORTS</p>
+</div>
+<div class="L" id="s2l" style="color:#00ff88">02 — GREEN WAVE</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     3. ECLIPSE — Celestial alignment. Sun/moon totality.
+     Corona. Diamond ring. Shadow sweeps.
+     Perspective: LOOKING UP — cosmic scale.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s3">
+<canvas class="z1" id="s3a"></canvas><canvas class="z2" id="s3b"></canvas><canvas class="z3" id="s3c"></canvas>
+<div class="F" id="s3f" style="background:radial-gradient(circle at 50% 40%,rgba(255,200,100,.8),transparent 30%)"></div>
+<div class="C">
+  <h1 class="T" id="s3t" style="color:#fff;text-shadow:0 0 60px rgba(255,200,100,.6),0 0 150px rgba(255,150,50,.3)">ECLIPSE</h1>
+  <p class="U" id="s3u" style="color:rgba(255,200,100,.5)">DARKNESS BEFORE THE BREAKOUT</p>
+</div>
+<div class="L" id="s3l" style="color:#ffd700">03 — ALIGNMENT</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     4. FORGE — Sparks flying. Anvil strikes. Molten metal.
+     The edge is BUILT, not found.
+     Perspective: CLOSE-UP — industrial, intimate.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s4">
+<canvas class="z1" id="s4a"></canvas><canvas class="z2" id="s4b"></canvas>
+<div class="F" id="s4f" style="background:radial-gradient(ellipse at 50% 70%,rgba(255,150,0,.7),transparent 40%)"></div>
+<div class="C">
+  <h1 class="T" id="s4t" style="background:linear-gradient(180deg,#fff,#ff8800,#ff4400);-webkit-background-clip:text;background-clip:text;color:transparent">FORGED</h1>
+  <p class="U" id="s4u" style="color:rgba(255,150,50,.5)">THE EDGE IS BUILT. NOT FOUND.</p>
+</div>
+<div class="L" id="s4l" style="color:#ff8800">04 — THE FORGE</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     5. CONVERGENCE — Lines from ALL edges racing to center.
+     The moment all indicators align. Then DETONATION.
+     Perspective: TOP-DOWN — god view.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s5">
+<canvas class="z1" id="s5a"></canvas><canvas class="z2" id="s5b"></canvas>
+<div class="F" id="s5f" style="background:#fff"></div>
+<div class="C">
+  <h1 class="T" id="s5t" style="color:#fff;text-shadow:0 0 50px rgba(0,255,200,.5)">CONVERGENCE</h1>
+  <p class="U" id="s5u" style="color:rgba(0,255,200,.5)">WHEN EVERYTHING ALIGNS</p>
+</div>
+<div class="L" id="s5l" style="color:#00ffc8">05 — THE SETUP</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     6. BLOODBATH — Red rain. Cascading liquidations.
+     Blood in the water. The crash.
+     Perspective: OVERHEAD RAIN — looking down into carnage.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s6">
+<canvas class="z1" id="s6a"></canvas><canvas class="z2" id="s6b"></canvas><canvas class="z3" id="s6c"></canvas>
+<div class="F" id="s6f" style="background:rgba(255,0,0,.4)"></div>
+<div class="C">
+  <h1 class="T" id="s6t" style="color:#ff1133;text-shadow:0 0 80px rgba(255,0,50,.6)">BLOODBATH</h1>
+  <p class="U" id="s6u" style="color:rgba(255,50,80,.5)">WHEN THEY SELL, WE HUNT</p>
+</div>
+<div class="L" id="s6l" style="color:#ff1133">06 — LIQUIDATION</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     7. NERVE CENTER — Full trading terminal. Live data
+     streams, multiple charts, order flow, the cockpit.
+     Perspective: COCKPIT VIEW — pilot's seat.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s7">
+<canvas class="z1" id="s7a"></canvas><canvas class="z2" id="s7b"></canvas><canvas class="z3" id="s7c"></canvas>
+<div class="F" id="s7f" style="background:rgba(0,255,136,.3)"></div>
+<div class="C">
+  <h1 class="T" id="s7t" style="color:#00ff88;text-shadow:0 0 60px rgba(0,255,136,.5);font-size:clamp(3rem,10vw,9rem)">NERVE CENTER</h1>
+  <p class="U" id="s7u" style="color:rgba(0,255,136,.4)">TOTAL MARKET AWARENESS</p>
+</div>
+<div class="L" id="s7l" style="color:#00ff88">07 — COMMAND</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     8. ASCENSION — Vertical rise through cloud layers.
+     Breaking resistance. Sunlight above. The climb.
+     Perspective: VERTICAL — rising camera.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s8">
+<canvas class="z1" id="s8a"></canvas><canvas class="z2" id="s8b"></canvas><canvas class="z3" id="s8c"></canvas>
+<div class="F" id="s8f" style="background:linear-gradient(0deg,transparent,rgba(255,255,200,.6))"></div>
+<div class="C">
+  <h1 class="T" id="s8t" style="background:linear-gradient(180deg,#fff,#ffd700,#00ff88);-webkit-background-clip:text;background-clip:text;color:transparent">ASCENSION</h1>
+  <p class="U" id="s8u" style="color:rgba(255,220,100,.5)">ABOVE ALL RESISTANCE</p>
+</div>
+<div class="L" id="s8l" style="color:#ffd700">08 — BREAKOUT</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     9. OMEGA — The options chain detonation. Greeks
+     visualized as energy. Gamma explosion. Total event.
+     Perspective: 3D DEPTH — layered energy.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s9">
+<canvas class="z1" id="s9a"></canvas><canvas class="z2" id="s9b"></canvas><canvas class="z3" id="s9c"></canvas>
+<div class="F" id="s9f" style="background:radial-gradient(circle,rgba(255,0,200,.6),transparent 40%)"></div>
+<div class="C">
+  <h1 class="T" id="s9t" style="background:linear-gradient(90deg,#ff00cc,#ff6600,#ffd700);-webkit-background-clip:text;background-clip:text;color:transparent">OMEGA</h1>
+  <p class="U" id="s9u" style="color:rgba(255,0,200,.5)">GAMMA × DELTA × THETA = DESTRUCTION</p>
+  <p class="V" id="s9v" style="color:rgba(255,100,0,.3)">[ 0DTE SPX — 573× RETURN ]</p>
+</div>
+<div class="L" id="s9l" style="color:#ff00cc">09 — OPTIONS NUKE</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     10. THE MOVE — Grand finale. Chart builds then
+     EXPLODES into RTP formation. Everything combined.
+     Perspective: EVERYTHING — all angles converge.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s10">
+<canvas class="z1" id="s10a"></canvas><canvas class="z2" id="s10b"></canvas><canvas class="z3" id="s10c"></canvas><canvas class="z4" id="s10d"></canvas>
+<div class="F" id="s10f" style="background:#fff"></div>
+<div class="BK" id="s10bk"></div>
+<div class="C">
+  <h1 class="T" id="s10t" style="background:linear-gradient(180deg,#fff,#00ff88,#006633);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:clamp(2.5rem,8vw,7rem)">THE MOVE PRIOR<br>TO THE MOVE</h1>
+  <p class="U" id="s10u" style="color:rgba(0,255,136,.6)">EXPLOSIVE SWINGS — REVOLUTION TRADING PROS</p>
+  <p class="V" id="s10v" style="color:rgba(0,255,136,.3)">[ 18,000+ TRADERS // EST. BY BILLY RIBEIRO ]</p>
+</div>
+<div class="L" id="s10l" style="color:#00ff88">10 — THE MOVE</div>
+<div class="R" id="s10r" style="color:rgba(0,255,136,.3)">REVOLUTION<br>TRADING<br>PROS</div>
+</section>
+
+<div style="height:10vh;background:#000"></div>
+
+<script>
+/* ═══════ SHARED UTILITIES ═══════ */
+function bolt(ctx,x1,y1,x2,y2,gen,mx,clr,alpha){
+  if(gen>mx)return;
+  const segs=5+Math.floor(Math.random()*5);
+  const pts=[{x:x1,y:y1}];
+  const dx=x2-x1,dy=y2-y1,len=Math.sqrt(dx*dx+dy*dy);
+  if(len<2)return;
+  const nx=-dy/len,ny=dx/len;
+  for(let i=1;i<segs;i++){
+    const t=i/segs,off=(Math.random()-.5)*len*.2/(gen+1);
+    pts.push({x:x1+dx*t+nx*off,y:y1+dy*t+ny*off});
+  }
+  pts.push({x:x2,y:y2});
+  const a=alpha/(gen*.6+1);
+  ctx.beginPath();pts.forEach((p,i)=>{i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)});
+  ctx.strokeStyle=clr.replace('A',a);ctx.lineWidth=Math.max(.5,3/(gen+1));
+  ctx.shadowBlur=15/(gen+1);ctx.shadowColor=clr.replace('A',.5);ctx.stroke();
+  // White core
+  ctx.beginPath();pts.forEach((p,i)=>{i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y)});
+  ctx.strokeStyle=`rgba(255,255,255,${a*.5})`;ctx.lineWidth=Math.max(.3,1.5/(gen+1));ctx.stroke();
+  ctx.shadowBlur=0;
+  if(gen<mx-1&&Math.random()>.4){
+    const bi=Math.floor(segs*.3+Math.random()*segs*.4);
+    const bp=pts[bi];if(!bp)return;
+    const ba=Math.atan2(dy,dx)+(Math.random()-.5)*1.8;
+    const bl=len*(.2+Math.random()*.3)/(gen+1);
+    bolt(ctx,bp.x,bp.y,bp.x+Math.cos(ba)*bl,bp.y+Math.sin(ba)*bl,gen+1,mx,clr,alpha);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   1. GENESIS — Big bang from nothing.
+   3000 stars born from single point. Galaxy spiral.
+   Cinematic: Black → 3 second silence → BANG
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s1a'),document.getElementById('s1b'),document.getElementById('s1c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,bang={v:0},formed=0;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const N=3000;let stars=[];
+for(let i=0;i<N;i++){
+  const a=Math.random()*Math.PI*2,d=Math.random();
+  stars.push({
+    a,d,speed:2+Math.random()*10,
+    fx:Math.cos(a)*(50+d*Math.min(w||1920,1080)*0.6),
+    fy:Math.sin(a)*(50+d*Math.min(w||1920,1080)*0.6)*.5,
+    x:0,y:0,size:Math.random()*2.5+.5,
+    hue:30+Math.random()*40,bright:Math.random()*.5+.5,
+    trail:[]
+  });
+}
+// Spiral arms
+let spiral=[];
+for(let i=0;i<500;i++){
+  const arm=Math.floor(Math.random()*3);
+  const dist=Math.random()*300+50;
+  const angle=arm*(Math.PI*2/3)+dist*.008+Math.random()*.3;
+  spiral.push({angle,dist,speed:.001+Math.random()*.002,size:Math.random()*2+1,hue:20+Math.random()*50});
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;const B=bang.v;
+  const[xa,xb,xc]=cx;const CX=w/2,CY=h/2;
+
+  xa.fillStyle=`rgba(0,0,0,${B<1?.3:.08})`;xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  if(B<=0){requestAnimationFrame(draw);return}
+
+  // Stars exploding outward
+  xa.globalCompositeOperation='lighter';
+  const mx=(MX/w-.5)*40,my=(MY/h-.5)*40;
+  stars.forEach(s=>{
+    const progress=Math.min(1,B);
+    s.x=s.fx*progress;s.y=s.fy*progress;
+    const px=CX+s.x+mx*s.d,py=CY+s.y+my*s.d;
+    if(px<-20||px>w+20||py<-20||py>h+20)return;
+
+    const alpha=s.bright*Math.min(1,B)*(.5+Math.sin(t*5+s.a)*0.3);
+    xa.beginPath();xa.arc(px,py,s.size*(B<.3?B/.3:1),0,Math.PI*2);
+    xa.fillStyle=`hsla(${s.hue},80%,${60+s.bright*30}%,${alpha})`;
+    xa.fill();
+
+    // Streak during explosion
+    if(B<2&&B>.1){
+      const streak=Math.min(B,1)*15*s.speed/10;
+      const angle=Math.atan2(s.y,s.x);
+      xa.beginPath();
+      xa.moveTo(px,py);
+      xa.lineTo(px-Math.cos(angle)*streak,py-Math.sin(angle)*streak);
+      xa.strokeStyle=`hsla(${s.hue},80%,70%,${alpha*.6})`;
+      xa.lineWidth=s.size*.6;xa.stroke();
+    }
+  });
+  xa.globalCompositeOperation='source-over';
+
+  // Spiral galaxy forming (after initial explosion)
+  if(B>2){
+    xb.globalCompositeOperation='lighter';
+    const sF=Math.min(1,(B-2)/3);
+    spiral.forEach(s=>{
+      s.angle+=s.speed;
+      const px=CX+Math.cos(s.angle)*s.dist*sF+mx*.5;
+      const py=CY+Math.sin(s.angle)*s.dist*.45*sF+my*.5;
+      xb.beginPath();xb.arc(px,py,s.size*sF,0,Math.PI*2);
+      xb.fillStyle=`hsla(${s.hue},80%,60%,${sF*.5})`;
+      xb.shadowBlur=6;xb.shadowColor=`hsla(${s.hue},100%,50%,.3)`;
+      xb.fill();xb.shadowBlur=0;
+    });
+    xb.globalCompositeOperation='source-over';
+  }
+
+  // Core glow
+  const coreR=B<1?B*100:100-Math.min(80,(B-1)*20);
+  const grd=xc.createRadialGradient(CX,CY,0,CX,CY,coreR);
+  grd.addColorStop(0,`rgba(255,220,150,${Math.min(.8,B*.4)})`);
+  grd.addColorStop(.3,`rgba(255,150,50,${Math.min(.3,B*.15)})`);
+  grd.addColorStop(1,'transparent');
+  xc.fillStyle=grd;xc.fillRect(0,0,w,h);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s1',start:'top 60%',onEnter:()=>{
+  on=1;
+  const tl=gsap.timeline();
+  // BLACK silence for 1.5s (cinematic hold)
+  tl.set('#s1bk',{opacity:1});
+  // Tiny light appears at center
+  tl.to('#s1bk',{opacity:.95,duration:1},1);
+  // BANG
+  tl.to(bang,{v:5,duration:4,ease:'power2.out'},2);
+  tl.to('#s1bk',{opacity:0,duration:.05},2);
+  tl.set('#s1f',{opacity:1},2);
+  tl.to('#s1f',{opacity:0,duration:2.5,ease:'power3.out'},2.05);
+  tl.add(()=>shake('#s1 .C',50,.8),2);
+  // Title after dust settles
+  tl.to('#s1t',{opacity:1,duration:.5},4);
+  tl.from('#s1t',{scale:6,filter:'blur(30px)',duration:.6,ease:'power4.out'},4);
+  tl.to('#s1u',{opacity:1,duration:1},4.8);
+  tl.to('#s1l',{opacity:.12,duration:.5},4.5);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   2. TSUNAMI — Green wave of candles building left→right.
+   Foam particles. Underwater caustics. SIDE SCROLL.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s2a'),document.getElementById('s2b'),document.getElementById('s2c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,waveX={v:-200};
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+let foam=[];
+for(let i=0;i<800;i++) foam.push({x:-100,y:0,vx:0,vy:0,size:Math.random()*5+1,life:0,hue:140+Math.random()*30});
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;
+  xa.fillStyle='rgba(0,3,8,.08)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  const WX=waveX.v;
+
+  // Deep water with caustics
+  for(let i=0;i<8;i++){
+    const cx2=w*.1+i*w*.12+Math.sin(t+i*.7)*40;
+    const cy2=h*.2+Math.sin(t*.5+i)*30;
+    const grd=xa.createRadialGradient(cx2,cy2,0,cx2,cy2,80);
+    grd.addColorStop(0,`rgba(0,100,130,.03)`);grd.addColorStop(1,'transparent');
+    xa.fillStyle=grd;xa.fillRect(cx2-80,cy2-80,160,160);
+  }
+
+  // THE WAVE — massive wall of green
+  xb.globalCompositeOperation='lighter';
+  const waveH=h*.7;
+  const numCandles=60;
+
+  for(let i=0;i<numCandles;i++){
+    const candleX=WX-i*15;
+    if(candleX<-30||candleX>w+100)continue;
+
+    // Wave shape — exponential curve
+    const wavePhase=i/numCandles;
+    const candleH=waveH*(Math.pow(1-wavePhase,1.5))*(0.3+Math.sin(t*3+i*.2)*.15);
+    const candleY=h*.85-candleH;
+    const candleW=12;
+
+    // Water body
+    const bodyAlpha=.15+wavePhase*.1;
+    xb.fillStyle=`rgba(0,255,136,${bodyAlpha})`;
+    xb.fillRect(candleX-candleW/2,candleY,candleW,candleH);
+
+    // Candle glow
+    if(i<15){
+      xb.shadowBlur=20;xb.shadowColor=`rgba(0,255,136,${(1-i/15)*.4})`;
+      xb.fillRect(candleX-candleW/2,candleY,candleW,candleH);
+      xb.shadowBlur=0;
+    }
+
+    // Wave wick (spray)
+    xb.fillStyle=`rgba(0,255,180,${bodyAlpha*.7})`;
+    xb.fillRect(candleX-1,candleY-Math.random()*20-5,2,Math.random()*20+5);
+  }
+
+  // Crest foam
+  const crestX=WX;
+  const crestY=h*.15+Math.sin(t*4)*20;
+  xb.beginPath();
+  for(let i=0;i<40;i++){
+    const fx=crestX-i*5+(Math.random()-.5)*10;
+    const fy=crestY+Math.pow(i/40,2)*h*.7+(Math.random()-.5)*15;
+    xb.moveTo(fx,fy);xb.arc(fx,fy,Math.random()*6+2,0,Math.PI*2);
+  }
+  xb.fillStyle='rgba(150,255,200,.3)';xb.fill();
+  xb.globalCompositeOperation='source-over';
+
+  // Foam particles spraying from crest
+  foam.forEach(f=>{
+    if(f.life<=0&&Math.abs(crestX-w/2)<w){
+      f.x=crestX+(Math.random()-.5)*40;
+      f.y=crestY+Math.random()*40;
+      f.vx=Math.random()*6+2;f.vy=-Math.random()*8-3;
+      f.life=1;
+    }
+    if(f.life>0){
+      f.vy+=.15;f.x+=f.vx;f.y+=f.vy;f.life-=.012;
+      xc.beginPath();xc.arc(f.x,f.y,f.size*f.life,0,Math.PI*2);
+      xc.fillStyle=`hsla(${f.hue},100%,70%,${f.life*.6})`;
+      xc.shadowBlur=f.size*3;xc.shadowColor=`hsla(${f.hue},100%,50%,${f.life*.3})`;
+      xc.fill();xc.shadowBlur=0;
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s2',start:'top 60%',onEnter:()=>{
+  on=1;
+  const tl=gsap.timeline();
+  tl.to(waveX,{v:w+300,duration:4,ease:'power2.in'},0);
+  tl.to('#s2f',{opacity:.6,duration:.1},.5);
+  tl.to('#s2f',{opacity:0,duration:1.5},.6);
+  tl.to('#s2t',{opacity:1,duration:.5},2);
+  tl.from('#s2t',{x:-200,filter:'blur(20px)',duration:.5,ease:'power4.out'},2);
+  tl.add(()=>shake('#s2 .C',20,.4),2);
+  tl.to('#s2u',{opacity:1,duration:1},2.8);
+  tl.to('#s2l',{opacity:.12,duration:.5},2.5);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   3. ECLIPSE — Total solar eclipse. Corona. Diamond ring.
+   Stars appear in darkness. COSMIC PERSPECTIVE.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s3a'),document.getElementById('s3b'),document.getElementById('s3c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,moonX={v:0},totality=0;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+let stars=[];for(let i=0;i<600;i++)stars.push({x:Math.random()*2000,y:Math.random()*1200,s:Math.random()*2+.3,a:Math.random()*.7+.1,tw:Math.random()*10});
+let corona=[];for(let i=0;i<1500;i++){
+  const a=Math.random()*Math.PI*2;const d=80+Math.random()*200;
+  corona.push({a,d,size:Math.random()*2+.5,bright:Math.random()*.5+.5,speed:(Math.random()-.5)*.002});
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.006;
+  const[xa,xb,xc]=cx;
+  const CX=w/2+(MX/w-.5)*20,CY=h*.4+(MY/h-.5)*15;
+  const sunR=70;
+
+  xa.fillStyle='rgba(0,0,3,.1)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  // Stars visible during totality
+  const starAlpha=totality;
+  stars.forEach(s=>{
+    const tw=.5+Math.sin(t*3+s.tw)*.5;
+    xa.beginPath();xa.arc(s.x/2000*w,s.y/1200*h,s.s,0,Math.PI*2);
+    xa.fillStyle=`rgba(255,255,255,${s.a*tw*starAlpha})`;xa.fill();
+  });
+
+  // SUN — glowing disk
+  const sunGlow=xb.createRadialGradient(CX,CY,sunR*.8,CX,CY,sunR*4);
+  sunGlow.addColorStop(0,`rgba(255,200,100,${.3*(1-totality*.5)})`);
+  sunGlow.addColorStop(.3,`rgba(255,150,50,${.1*(1-totality*.3)})`);
+  sunGlow.addColorStop(1,'transparent');
+  xb.fillStyle=sunGlow;xb.fillRect(0,0,w,h);
+
+  // Sun disk
+  xb.beginPath();xb.arc(CX,CY,sunR,0,Math.PI*2);
+  xb.fillStyle=`rgba(255,220,150,${.9-totality*.7})`;
+  xb.shadowBlur=60;xb.shadowColor=`rgba(255,180,80,${.6-totality*.4})`;
+  xb.fill();xb.shadowBlur=0;
+
+  // CORONA — visible during totality (additive)
+  if(totality>.3){
+    xb.globalCompositeOperation='lighter';
+    corona.forEach(c=>{
+      c.a+=c.speed;
+      const d=c.d+Math.sin(t+c.a*3)*15;
+      const px=CX+Math.cos(c.a)*d;
+      const py=CY+Math.sin(c.a)*d;
+      const coronaAlpha=c.bright*(totality-.3)/.7*.6;
+      // Streamers — elongated toward/away from center
+      const angle=Math.atan2(py-CY,px-CX);
+      xb.beginPath();
+      xb.moveTo(px-Math.cos(angle)*c.size*3,py-Math.sin(angle)*c.size*3);
+      xb.lineTo(px+Math.cos(angle)*c.size*3,py+Math.sin(angle)*c.size*3);
+      xb.strokeStyle=`rgba(255,200,150,${coronaAlpha})`;
+      xb.lineWidth=c.size;xb.stroke();
+      // Dot
+      xb.beginPath();xb.arc(px,py,c.size,0,Math.PI*2);
+      xb.fillStyle=`rgba(255,220,180,${coronaAlpha*.8})`;xb.fill();
+    });
+    xb.globalCompositeOperation='source-over';
+  }
+
+  // MOON — black disk moving across sun
+  const moonOff=moonX.v;
+  const moonCX=CX+moonOff;
+  xc.beginPath();xc.arc(moonCX,CY,sunR+2,0,Math.PI*2);
+  xc.fillStyle='#000';xc.fill();
+  // Moon limb highlight
+  xc.beginPath();xc.arc(moonCX+3,CY,sunR+1,0,Math.PI*2);
+  xc.strokeStyle=`rgba(200,200,220,${totality*.1})`;xc.lineWidth=1;xc.stroke();
+
+  // Diamond ring effect at edges of totality
+  if(totality>.5&&totality<1){
+    const diamondSide=moonOff>0?-1:1;
+    const dx=CX+diamondSide*(sunR-3),dy=CY;
+    xc.beginPath();xc.arc(dx,dy,4+Math.sin(t*10)*2,0,Math.PI*2);
+    xc.fillStyle=`rgba(255,255,255,${(1-Math.abs(totality-.75)*4)*.9})`;
+    xc.shadowBlur=40;xc.shadowColor='rgba(255,220,150,.8)';
+    xc.fill();xc.shadowBlur=0;
+  }
+
+  totality=Math.max(0,1-Math.abs(moonOff)/(sunR*1.2));
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s3',start:'top 60%',onEnter:()=>{
+  on=1;
+  const tl=gsap.timeline();
+  // Moon approaches from left
+  tl.fromTo(moonX,{v:sunR*3},{v:-sunR*3,duration:8,ease:'power1.inOut'},0);
+  // Flash at totality
+  tl.to('#s3f',{opacity:.6,duration:.08},3.5);
+  tl.to('#s3f',{opacity:0,duration:1.5},3.6);
+  tl.to('#s3t',{opacity:1,duration:.8},3.8);
+  tl.from('#s3t',{y:-40,filter:'blur(10px)',duration:.8,ease:'power3.out'},3.8);
+  tl.to('#s3u',{opacity:1,duration:1},4.5);
+  tl.to('#s3l',{opacity:.12,duration:.5},4);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   4. FORGE — Anvil sparks. Molten metal. Industrial.
+   Mouse = hammer position. Click area generates sparks.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s4a'),document.getElementById('s4b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,sparks=[],embers=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const anvilX=.5,anvilY=.7;
+function hammerStrike(){
+  if(!on)return;
+  const ax=w*anvilX,ay=h*anvilY;
+  for(let i=0;i<120;i++){
+    const a=-Math.PI*.9+Math.random()*Math.PI*.8; // upward arc
+    const spd=5+Math.random()*15;
+    sparks.push({
+      x:ax+(Math.random()-.5)*30,y:ay,
+      vx:Math.cos(a)*spd*(Math.random()>.5?1:-1),
+      vy:Math.sin(a)*spd,
+      size:Math.random()*3+.5,life:1,
+      hue:20+Math.random()*40
+    });
+  }
+  shake('#s4 .C',12,.2);
+  gsap.to('#s4f',{opacity:.3,duration:.04,onComplete:()=>gsap.to('#s4f',{opacity:0,duration:.4})});
+  gsap.delayedCall(.4+Math.random()*.3,hammerStrike);
+}
+
+for(let i=0;i<200;i++) embers.push({
+  x:Math.random()*2000,y:1200+Math.random()*100,
+  vx:(Math.random()-.5)*1,vy:-Math.random()*2-.5,
+  size:Math.random()*3+.5,life:Math.random(),
+  hue:10+Math.random()*40
+});
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;
+
+  xa.fillStyle='rgba(0,0,0,.08)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  const ax=w*anvilX,ay=h*anvilY;
+
+  // Anvil heat glow
+  xa.globalCompositeOperation='lighter';
+  const heatGrd=xa.createRadialGradient(ax,ay,0,ax,ay,150);
+  heatGrd.addColorStop(0,'rgba(255,100,0,.06)');heatGrd.addColorStop(1,'transparent');
+  xa.fillStyle=heatGrd;xa.fillRect(ax-150,ay-150,300,300);
+
+  // Molten metal on anvil
+  xb.beginPath();
+  xb.ellipse(ax,ay,40+Math.sin(t*3)*5,8,0,0,Math.PI*2);
+  xb.fillStyle=`rgba(255,150,30,${.5+Math.sin(t*5)*.2})`;
+  xb.shadowBlur=30;xb.shadowColor='rgba(255,100,0,.6)';
+  xb.fill();
+  // White hot center
+  xb.beginPath();xb.ellipse(ax,ay,20,4,0,0,Math.PI*2);
+  xb.fillStyle=`rgba(255,230,150,${.6+Math.sin(t*8)*.2})`;xb.fill();
+  xb.shadowBlur=0;
+
+  // SPARKS (additive)
+  sparks.forEach(s=>{
+    s.vy+=.25;s.x+=s.vx;s.y+=s.vy;s.life-=.015;s.vx*=.995;
+    if(s.life>0){
+      xa.beginPath();xa.arc(s.x,s.y,s.size*s.life,0,Math.PI*2);
+      xa.fillStyle=`hsla(${s.hue},100%,${50+s.life*30}%,${s.life*.9})`;
+      xa.fill();
+      // Streak
+      xa.beginPath();xa.moveTo(s.x,s.y);xa.lineTo(s.x-s.vx*2,s.y-s.vy*2);
+      xa.strokeStyle=`hsla(${s.hue},100%,60%,${s.life*.5})`;xa.lineWidth=s.size*.6;xa.stroke();
+    }
+  });
+  sparks=sparks.filter(s=>s.life>0);
+  xa.globalCompositeOperation='source-over';
+
+  // Ambient embers
+  embers.forEach(e=>{
+    e.x+=e.vx+Math.sin(t+e.x*.002)*.5;e.y+=e.vy;e.life-=.002;
+    if(e.life<=0){e.y=h+20;e.x=Math.random()*w;e.life=1}
+    const fl=.3+Math.sin(t*18+e.x)*0.7;
+    xb.beginPath();xb.arc(e.x,e.y,e.size*e.life,0,Math.PI*2);
+    xb.fillStyle=`hsla(${e.hue},100%,55%,${e.life*fl*.5})`;
+    xb.shadowBlur=e.size*4;xb.shadowColor=`hsla(${e.hue},100%,50%,${e.life*.3})`;
+    xb.fill();xb.shadowBlur=0;
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s4',start:'top 60%',onEnter:()=>{
+  on=1;hammerStrike();
+  const tl=gsap.timeline({delay:1.5});
+  tl.to('#s4t',{opacity:1,duration:.4},0);
+  tl.from('#s4t',{scale:1.5,filter:'blur(8px)',duration:.4,ease:'power4.out'},0);
+  tl.to('#s4u',{opacity:1,duration:1},.6);
+  tl.to('#s4l',{opacity:.12,duration:.5},.3);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   5. CONVERGENCE — 50 lines from all edges racing to
+   center point. Impact → detonation → ring explosion.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s5a'),document.getElementById('s5b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,lines=[],ring={r:0,a:0},shards=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+function initLines(){
+  lines=[];
+  const CX=w/2,CY=h/2;
+  for(let i=0;i<60;i++){
+    const edge=Math.floor(Math.random()*4);
+    let sx,sy;
+    if(edge===0){sx=Math.random()*w;sy=-50}
+    else if(edge===1){sx=w+50;sy=Math.random()*h}
+    else if(edge===2){sx=Math.random()*w;sy=h+50}
+    else{sx=-50;sy=Math.random()*h}
+    lines.push({sx,sy,progress:0,width:Math.random()*2+1,
+      hue:150+Math.random()*60,speed:0});
+  }
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;const CX=w/2,CY=h/2;
+
+  xa.fillStyle='rgba(0,0,0,.06)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  // Converging lines
+  xa.globalCompositeOperation='lighter';
+  lines.forEach(l=>{
+    if(l.progress>=1)return;
+    const p=l.progress;
+    const headX=l.sx+(CX-l.sx)*p;
+    const headY=l.sy+(CY-l.sy)*p;
+    const tailP=Math.max(0,p-.3);
+    const tailX=l.sx+(CX-l.sx)*tailP;
+    const tailY=l.sy+(CY-l.sy)*tailP;
+
+    xa.beginPath();xa.moveTo(tailX,tailY);xa.lineTo(headX,headY);
+    xa.strokeStyle=`hsla(${l.hue},100%,60%,${.6*Math.min(1,p*3)})`;
+    xa.lineWidth=l.width;
+    xa.shadowBlur=8;xa.shadowColor=`hsla(${l.hue},100%,50%,.4)`;
+    xa.stroke();
+    // Bright head
+    xa.beginPath();xa.arc(headX,headY,l.width*2,0,Math.PI*2);
+    xa.fillStyle=`hsla(${l.hue},100%,80%,${.8*p})`;xa.fill();
+    xa.shadowBlur=0;
+  });
+  xa.globalCompositeOperation='source-over';
+
+  // Explosion ring
+  if(ring.a>0){
+    xb.beginPath();xb.arc(CX,CY,ring.r,0,Math.PI*2);
+    xb.strokeStyle=`rgba(0,255,200,${ring.a})`;xb.lineWidth=4;
+    xb.shadowBlur=20;xb.shadowColor=`rgba(0,255,200,${ring.a*.5})`;
+    xb.stroke();xb.shadowBlur=0;
+    ring.r+=10;ring.a*=.97;
+  }
+
+  // Shards
+  xb.globalCompositeOperation='lighter';
+  shards.forEach(s=>{
+    s.x+=s.vx;s.y+=s.vy;s.vy+=.03;s.life-=.006;
+    if(s.life>0){
+      xb.beginPath();xb.arc(s.x,s.y,s.size*s.life,0,Math.PI*2);
+      xb.fillStyle=`hsla(${s.hue},100%,60%,${s.life*.7})`;xb.fill();
+    }
+  });
+  shards=shards.filter(s=>s.life>0);
+  xb.globalCompositeOperation='source-over';
+
+  // Center buildup glow
+  const buildUp=lines.length>0?lines.reduce((s,l)=>s+l.progress,0)/lines.length:0;
+  if(buildUp>0&&buildUp<1){
+    xb.beginPath();xb.arc(CX,CY,20+buildUp*30,0,Math.PI*2);
+    xb.fillStyle=`rgba(0,255,200,${buildUp*.3})`;
+    xb.shadowBlur=40;xb.shadowColor=`rgba(0,255,200,${buildUp*.5})`;
+    xb.fill();xb.shadowBlur=0;
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s5',start:'top 60%',onEnter:()=>{
+  on=1;initLines();
+  const tl=gsap.timeline();
+  // Lines converge with stagger
+  lines.forEach((l,i)=>{
+    tl.to(l,{progress:1,duration:1.5+Math.random(),ease:'power3.in'},i*.03);
+  });
+  // IMPACT
+  const impactT=2.5;
+  tl.add(()=>{
+    ring.r=0;ring.a=.8;
+    for(let i=0;i<500;i++){
+      const a=Math.random()*Math.PI*2,spd=3+Math.random()*10;
+      shards.push({x:w/2,y:h/2,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,
+        size:Math.random()*4+1,life:1,hue:150+Math.random()*60});
+    }
+  },impactT);
+  tl.to('#s5f',{opacity:.8,duration:.04},impactT);
+  tl.to('#s5f',{opacity:0,duration:1.5},impactT+.04);
+  tl.add(()=>shake('#s5 .C',40,.6),impactT);
+  tl.to('#s5t',{opacity:1,duration:.4},impactT+.3);
+  tl.from('#s5t',{scale:4,filter:'blur(25px)',duration:.5,ease:'power4.out'},impactT+.3);
+  tl.to('#s5u',{opacity:1,duration:1},impactT+1);
+  tl.to('#s5l',{opacity:.12,duration:.5},impactT+.5);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   6. BLOODBATH — Red candle rain. Liquidation cascade.
+   Numbers falling. Blood red everything. FEAR.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s6a'),document.getElementById('s6b'),document.getElementById('s6c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,candles=[],drops=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+function spawnCandle(){
+  if(!on)return;
+  const x=Math.random()*w;
+  candles.push({x,y:-60,speed:4+Math.random()*8,h:30+Math.random()*80,w:8+Math.random()*10,rot:(Math.random()-.5)*.3});
+  gsap.delayedCall(.03+Math.random()*.05,spawnCandle);
+}
+function spawnDrop(){
+  if(!on)return;
+  drops.push({x:Math.random()*w,y:-10,speed:8+Math.random()*12,len:20+Math.random()*40});
+  gsap.delayedCall(.01,spawnDrop);
+}
+
+// Price numbers falling
+let prices=[];
+function spawnPrice(){
+  if(!on)return;
+  const v=(-Math.random()*15-1).toFixed(2);
+  prices.push({x:Math.random()*w,y:-30,speed:3+Math.random()*5,text:`-$${Math.abs(v)}`,alpha:Math.random()*.5+.2});
+  gsap.delayedCall(.1+Math.random()*.2,spawnPrice);
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;
+
+  xa.fillStyle='rgba(0,0,0,.06)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  // Red ambient glow pulsing
+  const pulse=.03+Math.sin(t*3)*.015;
+  xa.fillStyle=`rgba(40,0,0,${pulse})`;xa.fillRect(0,0,w,h);
+
+  // Falling red candles
+  candles.forEach(c=>{
+    c.y+=c.speed;
+    xb.save();xb.translate(c.x,c.y);xb.rotate(c.rot);
+    xb.fillStyle=`rgba(255,20,40,.7)`;
+    xb.shadowBlur=10;xb.shadowColor='rgba(255,0,0,.4)';
+    xb.fillRect(-c.w/2,-c.h/2,c.w,c.h);
+    // Wick
+    xb.fillStyle='rgba(255,50,60,.5)';
+    xb.fillRect(-1,-c.h/2-10,2,10);
+    xb.fillRect(-1,c.h/2,2,10);
+    xb.shadowBlur=0;xb.restore();
+  });
+  candles=candles.filter(c=>c.y<h+100);
+
+  // Blood rain
+  drops.forEach(d=>{
+    d.y+=d.speed;
+    xa.beginPath();xa.moveTo(d.x,d.y);xa.lineTo(d.x-.5,d.y-d.len);
+    xa.strokeStyle='rgba(180,0,20,.3)';xa.lineWidth=1.5;xa.stroke();
+  });
+  drops=drops.filter(d=>d.y<h+50);
+
+  // Price numbers
+  xc.font='bold 14px "JetBrains Mono"';
+  prices.forEach(p=>{
+    p.y+=p.speed;
+    xc.fillStyle=`rgba(255,30,50,${p.alpha})`;
+    xc.fillText(p.text,p.x,p.y);
+  });
+  prices=prices.filter(p=>p.y<h+30);
+
+  // Floor pool — blood accumulates at bottom
+  const poolGrd=xb.createLinearGradient(0,h*.85,0,h);
+  poolGrd.addColorStop(0,'transparent');
+  poolGrd.addColorStop(1,`rgba(100,0,10,${.2+Math.sin(t)*.05})`);
+  xb.fillStyle=poolGrd;xb.fillRect(0,h*.85,w,h*.15);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s6',start:'top 60%',onEnter:()=>{
+  on=1;spawnCandle();spawnDrop();spawnPrice();
+  const tl=gsap.timeline({delay:.8});
+  tl.to('#s6f',{opacity:.3,duration:.05},0);tl.to('#s6f',{opacity:0,duration:.8},.05);
+  tl.to('#s6t',{opacity:1,duration:.3},.5);
+  tl.from('#s6t',{y:50,filter:'blur(10px)',duration:.3,ease:'power4.out'},.5);
+  tl.add(()=>shake('#s6 .C',15,.3),.5);
+  tl.to('#s6u',{opacity:1,duration:1},1.2);
+  tl.to('#s6l',{opacity:.12,duration:.5},.8);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   7. NERVE CENTER — Full cockpit. Live chart, order book,
+   data streams, HUD, everything at once.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s7a'),document.getElementById('s7b'),document.getElementById('s7c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,chartData=[],price=5890;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+function addCandle(){
+  const o=price;const vol=3+Math.random()*10;
+  price+=(Math.random()-.47)*vol+Math.sin(chartData.length*.1)*2;
+  const c=price;
+  chartData.push({o,c,h:Math.max(o,c)+Math.random()*vol*.3,l:Math.min(o,c)-Math.random()*vol*.3,bull:c>=o});
+  if(chartData.length>40)chartData.shift();
+}
+for(let i=0;i<15;i++)addCandle();
+
+// Matrix rain (mini version)
+const fontSize=12;const cols=Math.ceil(1920/fontSize);
+let mDrops=[];for(let i=0;i<cols;i++)mDrops[i]={y:Math.random()*-30,s:.3+Math.random()*.5};
+const CHARS='01アカサ$¥∞ΓΔ';
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;
+
+  // Matrix rain background
+  xa.fillStyle='rgba(0,0,0,.06)';xa.fillRect(0,0,w,h);
+  xa.font=`${fontSize}px "JetBrains Mono"`;
+  for(let i=0;i<cols;i++){
+    const x=i*fontSize,row=Math.floor(mDrops[i].y),y=row*fontSize;
+    const d=Math.hypot(x-MX,y-MY);const boost=Math.max(0,1-d/150)*.4;
+    if(y>0&&y<h){
+      const ch=CHARS[Math.floor(Math.random()*CHARS.length)];
+      xa.fillStyle=`rgba(0,255,136,${.5+boost})`;
+      if(boost>.1){xa.shadowBlur=8;xa.shadowColor='rgba(0,255,136,.5)'}
+      xa.fillText(ch,x,y);xa.shadowBlur=0;
+      for(let tr=1;tr<12;tr++){
+        const ty=y-tr*fontSize;if(ty<0)break;
+        xa.fillStyle=`rgba(0,${Math.floor(255*(1-tr/12))},${Math.floor(80*(1-tr/12))},${(1-tr/12)*.3})`;
+        xa.fillText(CHARS[(row-tr+100)%CHARS.length],x,ty);
+      }
+    }
+    mDrops[i].y+=mDrops[i].s;
+    if(mDrops[i].y*fontSize>h&&Math.random()>.98)mDrops[i].y=Math.random()*-8;
+  }
+
+  // CHART
+  xb.clearRect(0,0,w,h);
+  if(chartData.length>2){
+    const ps=chartData.flatMap(c=>[c.h,c.l]);
+    const minP=Math.min(...ps)-3,maxP=Math.max(...ps)+3,range=maxP-minP;
+    const cL=w*.25,cR=w*.75,cT=h*.2,cB=h*.75;
+    const gap=(cR-cL)/chartData.length,cW=Math.min(gap*.65,10);
+
+    chartData.forEach((c,i)=>{
+      const x=cL+i*gap+gap/2;
+      const oY=cT+(maxP-c.o)/range*(cB-cT);
+      const cY=cT+(maxP-c.c)/range*(cB-cT);
+      const hY=cT+(maxP-c.h)/range*(cB-cT);
+      const lY=cT+(maxP-c.l)/range*(cB-cT);
+      const clr=c.bull?'0,255,136':'255,51,68';
+      xb.strokeStyle=`rgba(${clr},.5)`;xb.lineWidth=1;
+      xb.beginPath();xb.moveTo(x,hY);xb.lineTo(x,lY);xb.stroke();
+      xb.fillStyle=`rgba(${clr},.8)`;
+      xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1);
+      if(i===chartData.length-1){
+        xb.shadowBlur=15;xb.shadowColor=`rgba(${clr},.5)`;
+        xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1);
+        xb.shadowBlur=0;
+        xb.setLineDash([3,3]);xb.strokeStyle=`rgba(${clr},.2)`;
+        xb.beginPath();xb.moveTo(cL,cY);xb.lineTo(cR+80,cY);xb.stroke();
+        xb.setLineDash([]);
+        xb.fillStyle=`rgba(${clr},.7)`;xb.font='11px "JetBrains Mono"';
+        xb.fillText(`$${c.c.toFixed(2)}`,cR+10,cY+4);
+      }
+    });
+  }
+
+  // HUD overlay
+  xc.clearRect(0,0,w,h);
+  xc.strokeStyle='rgba(0,255,136,.2)';xc.lineWidth=1;
+  const pad=20,bsz=40;
+  [[pad,pad,1,1],[w-pad,pad,-1,1],[pad,h-pad,1,-1],[w-pad,h-pad,-1,-1]].forEach(([x,y,dx,dy])=>{
+    xc.beginPath();xc.moveTo(x,y+dy*bsz);xc.lineTo(x,y);xc.lineTo(x+dx*bsz,y);xc.stroke();
+  });
+  xc.fillStyle='rgba(0,255,136,.3)';xc.font='9px Orbitron';
+  xc.fillText('◈ RTP TERMINAL v4.0',pad+10,pad+15);
+  const now=new Date();
+  xc.textAlign='right';xc.fillText(`${now.toTimeString().split(' ')[0]}`,w-pad-10,pad+15);xc.textAlign='start';
+
+  // Rotating reticle
+  xc.save();xc.translate(w/2,h/2);xc.rotate(t*.2);
+  xc.beginPath();xc.arc(0,0,Math.min(w,h)*.38,0,Math.PI*2);
+  xc.strokeStyle='rgba(0,255,136,.05)';xc.stroke();
+  for(let i=0;i<36;i++){
+    const a=i/36*Math.PI*2,r1=Math.min(w,h)*.36,r2=Math.min(w,h)*(i%3===0?.34:.355);
+    xc.beginPath();xc.moveTo(Math.cos(a)*r1,Math.sin(a)*r1);xc.lineTo(Math.cos(a)*r2,Math.sin(a)*r2);
+    xc.strokeStyle=`rgba(0,255,136,${i%3===0?.1:.03})`;xc.stroke();
+  }
+  xc.restore();
+
+  // Mouse crosshair
+  xc.setLineDash([3,6]);xc.strokeStyle='rgba(0,255,136,.15)';
+  xc.beginPath();xc.moveTo(MX,0);xc.lineTo(MX,h);xc.stroke();
+  xc.beginPath();xc.moveTo(0,MY);xc.lineTo(w,MY);xc.stroke();
+  xc.setLineDash([]);
+
+  requestAnimationFrame(draw);
+}
+draw();
+let chartInt;
+ScrollTrigger.create({trigger:'#s7',start:'top 60%',onEnter:()=>{
+  on=1;chartInt=setInterval(addCandle,500);
+  const tl=gsap.timeline({delay:.5});
+  tl.to('#s7f',{opacity:.15,duration:.05},.5);tl.to('#s7f',{opacity:0,duration:.5},.55);
+  tl.to('#s7t',{opacity:1,duration:.5},1);
+  tl.from('#s7t',{scale:2,filter:'blur(15px)',duration:.5,ease:'power4.out'},1);
+  tl.to('#s7u',{opacity:1,duration:1},1.5);
+  tl.to('#s7l',{opacity:.12,duration:.5},1);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   8. ASCENSION — Vertical rise. Clouds. Resistance levels
+   breaking as we climb. Sunlight above.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s8a'),document.getElementById('s8b'),document.getElementById('s8c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,altitude={v:0},clouds=[],shards=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const LEVELS=[{y:.8,label:'SUPPORT',color:'100,150,200'},{y:.6,label:'PIVOT',color:'150,180,220'},{y:.4,label:'RESISTANCE',color:'200,200,230'},{y:.2,label:'ALL-TIME HIGH',color:'255,220,150'}];
+for(let i=0;i<100;i++) clouds.push({x:Math.random()*w,y:Math.random()*h,w:Math.random()*300+100,h:Math.random()*40+15,speed:(Math.random()-.5)*.5,alpha:Math.random()*.15+.05});
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;const A=altitude.v;
+
+  // Sky gradient based on altitude
+  const skyGrd=xa.createLinearGradient(0,0,0,h);
+  const darkness=1-A;
+  skyGrd.addColorStop(0,`rgba(${Math.floor(A*100)},${Math.floor(A*150)},${Math.floor(A*255+50*(1-A))},.1)`);
+  skyGrd.addColorStop(1,`rgba(0,0,${Math.floor(20+A*20)},.1)`);
+  xa.fillStyle=skyGrd;xa.fillRect(0,0,w,h);
+
+  // Scrolling cloud layers
+  clouds.forEach(c=>{
+    c.x+=c.speed;if(c.x<-c.w)c.x=w+100;if(c.x>w+100)c.x=-c.w;
+    const cloudY=c.y+A*h*1.5; // clouds scroll DOWN as we ascend
+    if(cloudY<-100||cloudY>h+100)return;
+    xb.fillStyle=`rgba(200,210,230,${c.alpha*(1-A*.5)})`;
+    xb.beginPath();
+    xb.ellipse(c.x+c.w/2,cloudY,c.w/2,c.h/2,0,0,Math.PI*2);
+    xb.fill();
+  });
+
+  // Resistance levels (scroll down as we rise)
+  xc.clearRect(0,0,w,h);
+  LEVELS.forEach((lv,i)=>{
+    const ly=lv.y*h+A*h*1.2;
+    if(ly<-50||ly>h+50)return;
+    const broken=A>(1-lv.y)*.8;
+    if(!broken){
+      xc.setLineDash([6,4]);xc.strokeStyle=`rgba(${lv.color},.3)`;xc.lineWidth=2;
+      xc.beginPath();xc.moveTo(0,ly);xc.lineTo(w,ly);xc.stroke();xc.setLineDash([]);
+      xc.fillStyle=`rgba(${lv.color},.2)`;xc.font='10px "JetBrains Mono"';xc.fillText(lv.label,30,ly-8);
+    }
+  });
+
+  // Sun glow at top (revealed during ascension)
+  if(A>.5){
+    const sunAlpha=(A-.5)*2;
+    const sunGrd=xa.createRadialGradient(w/2,-50,0,w/2,-50,h*.7);
+    sunGrd.addColorStop(0,`rgba(255,240,200,${sunAlpha*.15})`);
+    sunGrd.addColorStop(.5,`rgba(255,200,100,${sunAlpha*.05})`);
+    sunGrd.addColorStop(1,'transparent');
+    xa.fillStyle=sunGrd;xa.fillRect(0,0,w,h);
+  }
+
+  // Shards from broken levels
+  shards.forEach(s=>{
+    s.x+=s.vx;s.y+=s.vy;s.vy+=.1;s.life-=.01;s.rot+=s.rv;
+    if(s.life>0){
+      xc.save();xc.translate(s.x,s.y);xc.rotate(s.rot);
+      xc.fillStyle=`rgba(${s.clr},${s.life*.5})`;
+      xc.fillRect(-s.w/2,-s.h/2,s.w,s.h);xc.restore();
+    }
+  });
+  shards=shards.filter(s=>s.life>0);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s8',start:'top 60%',onEnter:()=>{
+  on=1;
+  const tl=gsap.timeline();
+  tl.to(altitude,{v:1,duration:5,ease:'power2.inOut'},0);
+  // Break levels with shards
+  LEVELS.forEach((lv,i)=>{
+    const breakTime=i*1.2+.5;
+    tl.add(()=>{
+      for(let j=0;j<30;j++){
+        shards.push({x:Math.random()*w,y:lv.y*h+altitude.v*h*1.2,
+          vx:(Math.random()-.5)*8,vy:(Math.random()-.5)*4,
+          w:Math.random()*15+3,h:Math.random()*3+1,
+          rot:0,rv:(Math.random()-.5)*.2,life:1,clr:lv.color});
+      }
+      shake('#s8 .C',10,.2);
+    },breakTime);
+  });
+  tl.to('#s8f',{opacity:.4,duration:.1},4.5);tl.to('#s8f',{opacity:0,duration:2},4.6);
+  tl.to('#s8t',{opacity:1,duration:.6},4.5);
+  tl.from('#s8t',{y:60,filter:'blur(10px)',duration:.6,ease:'power4.out'},4.5);
+  tl.add(()=>shake('#s8 .C',20,.4),4.5);
+  tl.to('#s8u',{opacity:1,duration:1},5.2);
+  tl.to('#s8l',{opacity:.12,duration:.5},4.8);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   9. OMEGA — Options chain explosion. Greek energy.
+   Gamma cascade. The 573x 0DTE SPX moment.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s9a'),document.getElementById('s9b'),document.getElementById('s9c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,strikes=[],rampY={v:0},shards=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+for(let i=0;i<30;i++){
+  strikes.push({
+    x:w*.1+i*(w*.8/30),y:h*.5,
+    gamma:Math.exp(-Math.pow(i-15,2)/25)*.9,
+    lit:0,particles:[]
+  });
+}
+
+function detonate(idx){
+  if(idx<0||idx>=strikes.length)return;
+  const s=strikes[idx];if(s.lit>.5)return;
+  gsap.to(s,{lit:1,duration:.2,ease:'power4.out'});
+  for(let i=0;i<40;i++){
+    const a=Math.random()*Math.PI*2,spd=2+Math.random()*8;
+    s.particles.push({x:s.x,y:s.y,vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,life:1,size:Math.random()*3+1});
+  }
+  gsap.delayedCall(.05,()=>detonate(idx+1));
+  gsap.delayedCall(.07,()=>detonate(idx-1));
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;
+
+  xa.fillStyle='rgba(10,0,5,.06)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  // Gamma exposure curve
+  xb.beginPath();
+  strikes.forEach((s,i)=>{
+    const gy=h*.5-s.gamma*h*.35*(1+s.lit);
+    i===0?xb.moveTo(s.x,gy):xb.lineTo(s.x,gy);
+  });
+  xb.strokeStyle='rgba(255,0,200,.2)';xb.lineWidth=2;
+  xb.shadowBlur=15;xb.shadowColor='rgba(255,0,200,.3)';xb.stroke();xb.shadowBlur=0;
+
+  // Strike columns
+  xb.globalCompositeOperation='lighter';
+  strikes.forEach(s=>{
+    const barH=s.gamma*h*.3*(1+s.lit*3);
+    const g=s.lit;
+    xb.fillStyle=`rgba(255,${Math.floor(g*80)},${Math.floor(200-g*100)},${.15+g*.6})`;
+    xb.fillRect(s.x-4,h*.5-barH,8,barH);
+    if(g>.3){
+      xb.shadowBlur=25;xb.shadowColor=`rgba(255,0,200,${g*.5})`;
+      xb.fillRect(s.x-4,h*.5-barH,8,barH);xb.shadowBlur=0;
+    }
+    s.particles.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.vy+=.05;p.life-=.02;
+      if(p.life>0){
+        xb.beginPath();xb.arc(p.x,p.y,p.size*p.life,0,Math.PI*2);
+        xb.fillStyle=`rgba(255,100,200,${p.life*.7})`;xb.fill();
+      }
+    });
+    s.particles=s.particles.filter(p=>p.life>0);
+  });
+  xb.globalCompositeOperation='source-over';
+
+  // Exponential ramp
+  if(rampY.v>0){
+    xc.beginPath();
+    for(let i=0;i<w;i+=4){
+      const prog=i/w;
+      const ry=h*.85-Math.pow(prog,3)*rampY.v*h*.7;
+      i===0?xc.moveTo(i,ry):xc.lineTo(i,ry);
+    }
+    xc.strokeStyle='rgba(255,100,0,.4)';xc.lineWidth=3;
+    xc.shadowBlur=10;xc.shadowColor='rgba(255,100,0,.3)';
+    xc.stroke();xc.shadowBlur=0;
+  }
+
+  // Greek symbols
+  const greeks=['Γ','Δ','Θ','Σ','Ω','∂'];
+  xc.font='bold 35px serif';
+  greeks.forEach((g,i)=>{
+    const gx=w*.12+i*w*.15+Math.sin(t+i)*15;
+    const gy=h*.12+Math.cos(t*.7+i)*10;
+    xc.fillStyle=`rgba(255,0,200,${.06+Math.sin(t*2+i)*.03})`;
+    xc.fillText(g,gx,gy);
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s9',start:'top 60%',onEnter:()=>{
+  on=1;
+  const tl=gsap.timeline();
+  tl.add(()=>detonate(15),1.5); // ATM strike
+  gsap.to(rampY,{v:1,duration:3,delay:2,ease:'power3.in'});
+  tl.to('#s9f',{opacity:.5,duration:.05},2.5);
+  tl.to('#s9f',{opacity:0,duration:1.5},2.55);
+  tl.add(()=>shake('#s9 .C',30,.6),2.5);
+  tl.to('#s9t',{opacity:1,duration:.5},2.8);
+  tl.from('#s9t',{scale:3,filter:'blur(20px)',duration:.5,ease:'power4.out'},2.8);
+  tl.to('#s9u',{opacity:1,duration:1},3.5);
+  tl.to('#s9v',{opacity:1,duration:1},4);
+  tl.to('#s9l',{opacity:.12,duration:.5},3);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   10. THE MOVE — Grand finale. Chart builds candle by
+   candle. Breakout. DETONATION. 3000 particles.
+   Lightning. Screen goes white. Title SLAMS.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s10a'),document.getElementById('s10b'),document.getElementById('s10c'),document.getElementById('s10d')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,phase='idle',candles=[],shards=[],price=5850;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+// Chart: consolidation → THE MOVE
+function genChart(){
+  candles=[];price=5850;
+  for(let i=0;i<25;i++){
+    const o=price;price+=(Math.random()-.5)*5;const c=price;
+    candles.push({o,c,h:Math.max(o,c)+Math.random()*3,l:Math.min(o,c)-Math.random()*3,bull:c>=o,vis:false});
+  }
+  for(let i=0;i<15;i++){
+    const o=price;price+=Math.random()*25+8;const c=price;
+    candles.push({o,c,h:c+Math.random()*5,l:o-Math.random()*2,bull:true,vis:false,boom:true});
+  }
+}
+genChart();
+
+function explode(){
+  phase='boom';
+  for(let i=0;i<3000;i++){
+    const a=Math.random()*Math.PI*2,spd=3+Math.random()*16;
+    const g=Math.random()>.2;
+    shards.push({
+      x:w*.15+Math.random()*w*.65,y:h*.1+Math.random()*h*.6,
+      vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,
+      size:Math.random()*6+2,rot:0,rv:(Math.random()-.5)*.3,
+      life:1,clr:g?[0,255,136]:[255,220,50]
+    });
+  }
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc,xd]=cx;
+
+  xa.fillStyle=`rgba(0,0,0,${phase==='boom'?.04:.1})`;xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);xd.clearRect(0,0,w,h);
+
+  if(phase==='build'){
+    const vis=candles.filter(c=>c.vis);
+    if(!vis.length){requestAnimationFrame(draw);return}
+    const ps=vis.flatMap(c=>[c.h,c.l]);
+    const minP=Math.min(...ps)-5,maxP=Math.max(...ps)+5,range=maxP-minP;
+    const gap=w*.6/candles.length,cW=Math.min(gap*.6,10),offX=w*.2;
+
+    vis.forEach((c,idx)=>{
+      const i=candles.indexOf(c);
+      const x=offX+i*gap+gap/2;
+      const oY=h*.1+(maxP-c.o)/range*h*.6;
+      const cY=h*.1+(maxP-c.c)/range*h*.6;
+      const hY=h*.1+(maxP-c.h)/range*h*.6;
+      const lY=h*.1+(maxP-c.l)/range*h*.6;
+      const clr=c.bull?'0,255,136':'255,51,68';
+
+      xb.strokeStyle=`rgba(${clr},.5)`;xb.lineWidth=1;
+      xb.beginPath();xb.moveTo(x,hY);xb.lineTo(x,lY);xb.stroke();
+      xb.fillStyle=`rgba(${clr},.85)`;
+      xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1.5);
+      if(c.boom){
+        xb.shadowBlur=20;xb.shadowColor='rgba(0,255,136,.6)';
+        xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1.5);
+        xb.shadowBlur=0;
+      }
+    });
+  }
+
+  // EXPLOSION
+  if(phase==='boom'){
+    xa.globalCompositeOperation='lighter';
+    shards.forEach(s=>{
+      s.vy+=.04;s.x+=s.vx;s.y+=s.vy;s.vx*=.998;s.rot+=s.rv;s.life-=.004;
+      if(s.life>0){
+        xa.save();xa.translate(s.x,s.y);xa.rotate(s.rot);
+        xa.fillStyle=`rgba(${s.clr.join(',')},${s.life*.9})`;
+        xa.shadowBlur=4;xa.shadowColor=`rgba(${s.clr.join(',')},${s.life*.3})`;
+        xa.fillRect(-s.size/2,-s.size*.3,s.size,s.size*.6);
+        xa.shadowBlur=0;xa.restore();
+      }
+    });
+    shards=shards.filter(s=>s.life>0);
+    xa.globalCompositeOperation='source-over';
+
+    // Lightning during explosion
+    if(Math.random()>.7){
+      bolt(xc,w/2,h/2,Math.random()*w,Math.random()*h,0,2,'rgba(0,255,136,A)',.6);
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s10',start:'top 60%',onEnter:()=>{
+  on=1;phase='build';
+  const tl=gsap.timeline();
+  // Build chart
+  candles.forEach((c,i)=>{
+    const delay=i<25?i*.06:25*.06+(i-25)*.03;
+    tl.add(()=>{c.vis=true},delay);
+  });
+  const boomT=25*.06+15*.03+.3;
+  // BLACK CUT right before explosion (cinematic)
+  tl.set('#s10bk',{opacity:1},boomT-.15);
+  tl.set('#s10bk',{opacity:0},boomT);
+  // EXPLODE
+  tl.add(()=>explode(),boomT);
+  tl.set('#s10f',{opacity:1},boomT);
+  tl.to('#s10f',{opacity:0,duration:2.5,ease:'power3.out'},boomT+.04);
+  tl.add(()=>shake('#s10 .C',60,1),boomT);
+  // Title
+  tl.to('#s10t',{opacity:1,duration:.6},boomT+.5);
+  tl.from('#s10t',{scale:6,filter:'blur(40px)',duration:.6,ease:'power4.out'},boomT+.5);
+  tl.to('#s10u',{opacity:1,duration:1.2},boomT+1.5);
+  tl.to('#s10v',{opacity:1,duration:1},boomT+2.2);
+  tl.to('#s10l',{opacity:.12,duration:.5},boomT+1);
+  tl.to('#s10r',{opacity:.3,duration:1},boomT+2);
+}});
+})();
+</script>
+</body>
+</html>

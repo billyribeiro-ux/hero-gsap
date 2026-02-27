@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AnimationNav from '$lib/components/AnimationNav.svelte';
-	import TradingUniversesSet1 from '$lib/components/TradingUniversesSet1.svelte';
+	import TradingUniverses3Set1 from '$lib/components/TradingUniverses3Set1.svelte';
 </script>
 
-<TradingUniversesSet1 />
+<TradingUniverses3Set1 />
 <AnimationNav />

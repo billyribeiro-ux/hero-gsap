@@ -1,7 +1,7 @@
 <script lang="ts">
 	import AnimationNav from '$lib/components/AnimationNav.svelte';
-	import TenUniverses3Set1 from '$lib/components/TenUniverses3Set1.svelte';
+	import MagnumOpus3Set3 from '$lib/components/MagnumOpus3Set3.svelte';
 </script>
 
-<TenUniverses3Set1 />
+<MagnumOpus3Set3 />
 <AnimationNav />

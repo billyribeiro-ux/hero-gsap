@@ -3,11 +3,20 @@
 	import { goto } from '$app/navigation';
 
 	const sets = [
-		{ id: 'ten-universes-1', name: 'Ten Universes (1-5)', path: '/universes/1' },
-		{ id: 'ten-universes-2', name: 'Ten Universes (6-10)', path: '/universes/2' },
-		{ id: 'trading-1', name: 'Trading Universes (1-5)', path: '/trading/1' },
-		{ id: 'trading-2', name: 'Trading Universes (6-10)', path: '/trading/2' },
-		{ id: 'absolute-max', name: 'Absolute Maximum', path: '/absolute' }
+		{ id: 'ten-universes-1', name: 'Ten Universes (1-3)', path: '/universes/1' },
+		{ id: 'ten-universes-2', name: 'Ten Universes (4-6)', path: '/universes/2' },
+		{ id: 'ten-universes-3', name: 'Ten Universes (7-9)', path: '/universes/3' },
+		{ id: 'ten-universes-4', name: 'Ten Universes (10)', path: '/universes/4' },
+		{ id: 'trading-1', name: 'Trading (1-3)', path: '/trading/1' },
+		{ id: 'trading-2', name: 'Trading (4-6)', path: '/trading/2' },
+		{ id: 'trading-3', name: 'Trading (7-9)', path: '/trading/3' },
+		{ id: 'trading-4', name: 'Trading (10)', path: '/trading/4' },
+		{ id: 'absolute-1', name: 'Absolute Max (1-3)', path: '/absolute/1' },
+		{ id: 'absolute-2', name: 'Absolute Max (4-5)', path: '/absolute/2' },
+		{ id: 'magnum-opus-1', name: 'Magnum Opus (1-3)', path: '/magnum-opus/1' },
+		{ id: 'magnum-opus-2', name: 'Magnum Opus (4-6)', path: '/magnum-opus/2' },
+		{ id: 'magnum-opus-3', name: 'Magnum Opus (7-9)', path: '/magnum-opus/3' },
+		{ id: 'magnum-opus-4', name: 'Magnum Opus (10)', path: '/magnum-opus/4' }
 	];
 
 	let currentIndex = $derived(sets.findIndex(s => s.path === page.url.pathname) ?? -1);
