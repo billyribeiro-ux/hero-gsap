@@ -25,6 +25,12 @@
 	import HeroT4Volatility from '$lib/components/HeroT4Volatility.svelte';
 	import HeroT5PnL from '$lib/components/HeroT5PnL.svelte';
 	import HeroT6MarketCrash from '$lib/components/HeroT6MarketCrash.svelte';
+	import HeroMatrixTerminal from '$lib/components/HeroMatrixTerminal.svelte';
+	import HeroL10Detonation from '$lib/components/HeroL10Detonation.svelte';
+	import HeroL10WarRoom from '$lib/components/HeroL10WarRoom.svelte';
+	import HeroL10Impact from '$lib/components/HeroL10Impact.svelte';
+	import HeroL10Trailer from '$lib/components/HeroL10Trailer.svelte';
+	import HeroL10Shatter from '$lib/components/HeroL10Shatter.svelte';
 </script>
 
 <main>
@@ -54,6 +60,12 @@
 	<HeroT4Volatility />
 	<HeroT5PnL />
 	<HeroT6MarketCrash />
+	<HeroMatrixTerminal />
+	<HeroL10Detonation />
+	<HeroL10WarRoom />
+	<HeroL10Impact />
+	<HeroL10Trailer />
+	<HeroL10Shatter />
 </main>
 
 <style>
