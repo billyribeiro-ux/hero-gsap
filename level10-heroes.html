@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEVEL 10 — GSAP MAXIMUM</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,300;0,500;0,700;1,300&family=Syne:wght@400;700;800&family=Orbitron:wght@400;700;900&family=Anton&family=Oswald:wght@300;500;700&family=Vast+Shadow&family=Major+Mono+Display&display=swap" rel="stylesheet">
+<style>
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+  html{overflow-x:hidden}
+  body{background:#000;color:#fff;overflow-x:hidden;cursor:crosshair}
+
+  /* SVG FILTERS FOR GLOBAL EFFECTS */
+  .svg-filters{position:absolute;width:0;height:0}
+
+  /* ═══════════════════════════════════════════════════════
+     HERO 1: THE DETONATION
+     Full canvas particle explosion + shockwave ring +
+     screen shake + chromatic aberration + text from blast
+     ═══════════════════════════════════════════════════════ */
+  .hero-detonation{
+    position:relative;height:100vh;overflow:hidden;
+    background:#000;display:flex;align-items:center;justify-content:center;
+  }
+  .hero-detonation canvas{position:absolute;inset:0;z-index:1}
+  .det-flash{
+    position:absolute;inset:0;background:#fff;opacity:0;z-index:2;
+    pointer-events:none;mix-blend-mode:overlay;
+  }
+  .det-shockwave{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:10px;height:10px;border-radius:50%;
+    border:3px solid rgba(255,120,0,0.8);opacity:0;z-index:3;
+    box-shadow:0 0 40px rgba(255,80,0,0.4),inset 0 0 20px rgba(255,60,0,0.2);
+    pointer-events:none;
+  }
+  .det-shockwave-2{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:10px;height:10px;border-radius:50%;
+    border:2px solid rgba(255,200,50,0.5);opacity:0;z-index:3;
+    pointer-events:none;
+  }
+  .det-content{
+    position:relative;z-index:10;text-align:center;
+    filter:url(#chromatic);
+  }
+  .det-pre{
+    font-family:'JetBrains Mono',monospace;font-size:0.6rem;
+    letter-spacing:0.6em;text-transform:uppercase;
+    color:#ff6a00;margin-bottom:20px;opacity:0;
+    text-shadow:0 0 20px rgba(255,106,0,0.5);
+  }
+  .det-title{
+    font-family:'Anton',sans-serif;font-size:clamp(5rem,16vw,14rem);
+    line-height:0.85;letter-spacing:0.02em;
+    color:#fff;position:relative;overflow:visible;
+  }
+  .det-title .det-char{
+    display:inline-block;opacity:0;
+    filter:blur(20px);transform:scale(3) translateY(40px);
+    text-shadow:0 0 80px rgba(255,100,0,0.8);
+  }
+  .det-sub{
+    font-family:'Oswald',sans-serif;font-size:clamp(1rem,2.5vw,1.8rem);
+    font-weight:300;letter-spacing:0.3em;text-transform:uppercase;
+    color:rgba(255,255,255,0.4);margin-top:30px;opacity:0;
+    transform:translateY(30px);
+  }
+  .det-ember{
+    position:absolute;width:3px;height:3px;border-radius:50%;
+    background:#ff6a00;z-index:5;opacity:0;pointer-events:none;
+    box-shadow:0 0 6px #ff6a00,0 0 12px rgba(255,106,0,0.5);
+  }
+  .det-vignette{
+    position:absolute;inset:0;z-index:4;pointer-events:none;
+    background:radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.7) 100%);
+  }
+  .det-grain{
+    position:absolute;inset:0;z-index:6;pointer-events:none;opacity:0.08;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:256px;
+  }
+  .det-heatwave{
+    position:absolute;inset:0;z-index:3;pointer-events:none;
+    filter:url(#heatDistortion);opacity:0;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     HERO 2: THE WAR ROOM
+     Trading command center — holographic HUD, radar sweep,
+     live data streams, grid distortion, threat-level feel
+     ═══════════════════════════════════════════════════════ */
+  .hero-warroom{
+    position:relative;height:100vh;overflow:hidden;
+    background:#020508;
+  }
+  .wr-grid-canvas{position:absolute;inset:0;z-index:1}
+  .wr-hud{position:absolute;inset:0;z-index:5;pointer-events:none}
+  .wr-corner-bracket{
+    position:absolute;width:80px;height:80px;opacity:0;
+  }
+  .wr-corner-bracket::before,.wr-corner-bracket::after{
+    content:'';position:absolute;background:#00ff88;
+  }
+  .wr-corner-bracket.tl::before{top:0;left:0;width:30px;height:1px}
+  .wr-corner-bracket.tl::after{top:0;left:0;width:1px;height:30px}
+  .wr-corner-bracket.tr::before{top:0;right:0;width:30px;height:1px}
+  .wr-corner-bracket.tr::after{top:0;right:0;width:1px;height:30px}
+  .wr-corner-bracket.bl::before{bottom:0;left:0;width:30px;height:1px}
+  .wr-corner-bracket.bl::after{bottom:0;left:0;width:1px;height:30px}
+  .wr-corner-bracket.br::before{bottom:0;right:0;width:30px;height:1px}
+  .wr-corner-bracket.br::after{bottom:0;right:0;width:1px;height:30px}
+  .wr-corner-bracket.tl{top:30px;left:30px}
+  .wr-corner-bracket.tr{top:30px;right:30px}
+  .wr-corner-bracket.bl{bottom:30px;left:30px}
+  .wr-corner-bracket.br{bottom:30px;right:30px}
+  .wr-scanline{
+    position:absolute;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,rgba(0,255,136,0.15),transparent);
+    z-index:6;top:-2px;pointer-events:none;
+  }
+  .wr-data-stream{
+    position:absolute;z-index:4;font-family:'JetBrains Mono',monospace;
+    font-size:0.55rem;color:rgba(0,255,136,0.25);
+    letter-spacing:0.1em;line-height:1.4;white-space:pre;
+    overflow:hidden;opacity:0;
+  }
+  .wr-data-stream.left{top:15%;left:30px;width:180px;height:60%;text-align:left}
+  .wr-data-stream.right{top:10%;right:30px;width:180px;height:70%;text-align:right}
+  .wr-radar{
+    position:absolute;bottom:60px;left:60px;width:160px;height:160px;z-index:5;
+    border:1px solid rgba(0,255,136,0.15);border-radius:50%;opacity:0;
+  }
+  .wr-radar-sweep{
+    position:absolute;top:50%;left:50%;width:50%;height:2px;
+    background:linear-gradient(90deg,rgba(0,255,136,0.6),transparent);
+    transform-origin:left center;
+  }
+  .wr-radar-ring{
+    position:absolute;border:1px solid rgba(0,255,136,0.08);border-radius:50%;
+  }
+  .wr-radar-ring.r1{inset:20%;} .wr-radar-ring.r2{inset:40%;}
+  .wr-radar-dot{
+    position:absolute;width:4px;height:4px;border-radius:50%;
+    background:#00ff88;opacity:0;
+    box-shadow:0 0 8px #00ff88;
+  }
+  .wr-center{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    z-index:10;text-align:center;
+  }
+  .wr-threat{
+    font-family:'Orbitron',sans-serif;font-size:0.65rem;
+    letter-spacing:0.5em;color:#ff3333;margin-bottom:15px;
+    opacity:0;
+  }
+  .wr-threat .blink{animation:none}
+  @keyframes wrBlink{0%,100%{opacity:1}50%{opacity:0}}
+  .wr-main-title{
+    font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,10rem);
+    line-height:0.85;color:#fff;letter-spacing:0.05em;
+  }
+  .wr-main-title .wr-title-char{
+    display:inline-block;opacity:0;transform:translateY(80px);
+    text-shadow:0 0 40px rgba(0,255,136,0.3);
+  }
+  .wr-main-sub{
+    font-family:'JetBrains Mono',monospace;font-size:0.75rem;
+    letter-spacing:0.25em;color:rgba(0,255,136,0.5);
+    margin-top:20px;opacity:0;
+  }
+  .wr-main-sub .typing-cursor{
+    display:inline-block;width:8px;height:14px;
+    background:#00ff88;margin-left:4px;vertical-align:middle;
+  }
+  .wr-price-ticker{
+    position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+    z-index:10;display:flex;gap:40px;opacity:0;
+  }
+  .wr-ticker-item{
+    font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+    letter-spacing:0.15em;
+  }
+  .wr-ticker-item .symbol{color:rgba(255,255,255,0.5)}
+  .wr-ticker-item .price{color:#fff;margin:0 6px}
+  .wr-ticker-item .change.up{color:#00ff88}
+  .wr-ticker-item .change.down{color:#ff3333}
+  .wr-alert-bar{
+    position:absolute;top:0;left:0;right:0;height:2px;
+    background:linear-gradient(90deg,transparent,#ff3333,transparent);
+    z-index:20;opacity:0;transform:scaleX(0);
+  }
+  .wr-minicandle-container{
+    position:absolute;top:15%;right:220px;width:200px;height:250px;
+    z-index:4;opacity:0;
+  }
+  .wr-minicandle-container canvas{width:100%;height:100%}
+
+  /* ═══════════════════════════════════════════════════════
+     HERO 3: THE IMPACT
+     Giant text SLAMS into frame — dust explosion,
+     crack propagation, aftershock ripples, camera bounce,
+     debris particles, ground fracture
+     ═══════════════════════════════════════════════════════ */
+  .hero-impact{
+    position:relative;height:100vh;overflow:hidden;
+    background:#0a0908;display:flex;align-items:center;justify-content:center;
+  }
+  .imp-dust-canvas{position:absolute;inset:0;z-index:3}
+  .imp-crack-svg{position:absolute;inset:0;z-index:4;pointer-events:none}
+  .imp-ground{
+    position:absolute;bottom:0;left:0;right:0;height:40%;z-index:1;
+    background:linear-gradient(0deg,#1a1612 0%,#0a0908 100%);
+  }
+  .imp-ground-line{
+    position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent 10%,rgba(255,180,80,0.2) 50%,transparent 90%);
+    transform:scaleX(0);
+  }
+  .imp-content{
+    position:relative;z-index:10;text-align:center;
+  }
+  .imp-title{
+    font-family:'Vast Shadow',serif;font-size:clamp(4rem,13vw,11rem);
+    color:#fff;line-height:0.9;opacity:0;
+    transform:translateY(-200vh) scale(1.5);
+    text-shadow:0 20px 60px rgba(0,0,0,0.8);
+  }
+  .imp-subtitle{
+    font-family:'Oswald',sans-serif;font-weight:300;
+    font-size:clamp(0.9rem,2vw,1.4rem);letter-spacing:0.4em;
+    text-transform:uppercase;color:rgba(255,180,80,0.5);
+    margin-top:30px;opacity:0;transform:translateY(40px);
+  }
+  .imp-shockring{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:10px;height:10px;border-radius:50%;
+    border:2px solid rgba(255,180,80,0.6);opacity:0;z-index:5;
+    pointer-events:none;
+  }
+  .imp-debris{
+    position:absolute;z-index:6;pointer-events:none;opacity:0;
+    background:#8a7560;
+  }
+  .imp-flash{
+    position:absolute;inset:0;z-index:7;pointer-events:none;
+    background:radial-gradient(circle at 50% 55%,rgba(255,200,100,0.8),transparent 60%);
+    opacity:0;
+  }
+  .imp-dust-cloud{
+    position:absolute;bottom:25%;left:50%;transform:translateX(-50%);
+    width:0;height:200px;z-index:2;pointer-events:none;
+    background:radial-gradient(ellipse at 50% 100%,rgba(180,150,120,0.4),transparent 70%);
+    filter:blur(30px);opacity:0;
+  }
+
+  /* ═══════════════════════════════════════════════════════
+     HERO 4: CINEMATIC BLACKOUT TRAILER
+     Movie trailer with blackout cuts, dramatic zoom,
+     lens flare, whip transitions, final slam
+     ═══════════════════════════════════════════════════════ */
+  .hero-trailer{
+    position:relative;height:100vh;overflow:hidden;
+    background:#000;
+  }
+  .tr-blackout{
+    position:absolute;inset:0;background:#000;z-index:50;
+  }
+  .tr-scene{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    opacity:0;z-index:5;
+  }
+  .tr-scene-text{
+    font-family:'Oswald',sans-serif;font-weight:300;
+    font-size:clamp(1.5rem,4vw,3rem);letter-spacing:0.2em;
+    text-transform:uppercase;color:rgba(255,255,255,0.8);
+    text-align:center;line-height:1.5;
+  }
+  .tr-scene-text em{
+    font-family:'Instrument Serif',serif;font-style:italic;
+    font-size:1.3em;color:#ff3c00;letter-spacing:0;
+  }
+  .tr-final{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;z-index:10;
+  }
+  .tr-final-title{
+    font-family:'Anton',sans-serif;font-size:clamp(5rem,18vw,16rem);
+    line-height:0.8;color:#fff;opacity:0;
+    transform:scale(5);filter:blur(30px);
+  }
+  .tr-final-tag{
+    font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+    letter-spacing:0.5em;text-transform:uppercase;
+    color:#ff3c00;margin-top:30px;opacity:0;
+  }
+  .tr-final-cta{
+    margin-top:50px;padding:16px 50px;
+    border:1px solid rgba(255,255,255,0.2);background:transparent;
+    color:#fff;font-family:'Oswald',sans-serif;font-size:0.9rem;
+    letter-spacing:0.3em;text-transform:uppercase;cursor:pointer;
+    opacity:0;transition:all 0.3s;position:relative;overflow:hidden;
+  }
+  .tr-final-cta:hover{border-color:#ff3c00;color:#ff3c00}
+  .tr-final-cta::after{
+    content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,60,0,0.1),transparent);
+    transition:left 0.5s;
+  }
+  .tr-final-cta:hover::after{left:100%}
+  .tr-lens-flare{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:300px;height:300px;z-index:15;pointer-events:none;opacity:0;
+    background:radial-gradient(circle,rgba(255,200,100,0.6) 0%,rgba(255,150,50,0.2) 30%,transparent 70%);
+    mix-blend-mode:screen;
+  }
+  .tr-lens-streak{
+    position:absolute;top:50%;left:0;right:0;height:2px;z-index:15;
+    background:linear-gradient(90deg,transparent,rgba(255,200,150,0.4),transparent);
+    pointer-events:none;opacity:0;transform:translateY(-50%);
+  }
+  .tr-whip{
+    position:absolute;inset:0;z-index:20;pointer-events:none;
+    background:linear-gradient(90deg,#000 0%,transparent 15%,transparent 85%,#000 100%);
+    opacity:0;
+  }
+  .tr-counter{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-family:'Orbitron',sans-serif;font-size:clamp(6rem,20vw,15rem);
+    font-weight:900;color:#fff;z-index:30;opacity:0;
+    text-shadow:0 0 60px rgba(255,60,0,0.5);
+  }
+  .tr-grain{
+    position:absolute;inset:0;z-index:40;pointer-events:none;opacity:0.05;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size:256px;mix-blend-mode:overlay;
+  }
+  .tr-film-bars{
+    position:absolute;z-index:45;pointer-events:none;left:0;right:0;
+    background:#000;
+  }
+  .tr-film-bars.top{top:0;height:0}
+  .tr-film-bars.bottom{bottom:0;height:0}
+
+  /* ═══════════════════════════════════════════════════════
+     HERO 5: MARKET SHATTER
+     Candlestick chart that builds, then EXPLODES —
+     shards fly at camera, numbers rain, reforms as text
+     ═══════════════════════════════════════════════════════ */
+  .hero-shatter{
+    position:relative;height:100vh;overflow:hidden;
+    background:#060810;display:flex;align-items:center;justify-content:center;
+  }
+  .sht-canvas{position:absolute;inset:0;z-index:1}
+  .sht-number-rain{
+    position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;
+  }
+  .sht-number{
+    position:absolute;font-family:'JetBrains Mono',monospace;
+    color:rgba(0,255,136,0.15);font-size:0.7rem;opacity:0;
+  }
+  .sht-number.red{color:rgba(255,51,51,0.15)}
+  .sht-content{
+    position:relative;z-index:10;text-align:center;opacity:0;
+  }
+  .sht-title{
+    font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,14vw,12rem);
+    line-height:0.85;color:#fff;letter-spacing:0.03em;
+  }
+  .sht-title .sht-word{
+    display:block;opacity:0;transform:translateX(-100px);
+    filter:blur(10px);
+  }
+  .sht-title .sht-word:nth-child(2){color:#00ff88}
+  .sht-rule{
+    width:0;height:2px;margin:20px auto;
+    background:linear-gradient(90deg,#00ff88,#00aaff);
+  }
+  .sht-sub{
+    font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+    letter-spacing:0.4em;text-transform:uppercase;
+    color:rgba(255,255,255,0.3);opacity:0;
+  }
+  .sht-flash{
+    position:absolute;inset:0;background:#fff;opacity:0;z-index:8;pointer-events:none;
+  }
+
+  /* ═══════════ SPACING ═══════════ */
+  .section-break{
+    height:15vh;background:#000;position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .section-break .label{
+    font-family:'JetBrains Mono',monospace;font-size:0.5rem;
+    letter-spacing:0.6em;color:rgba(255,255,255,0.08);text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- SVG FILTERS -->
+<svg class="svg-filters">
+  <defs>
+    <filter id="chromatic">
+      <feOffset in="SourceGraphic" dx="3" dy="0" result="red"/>
+      <feOffset in="SourceGraphic" dx="-3" dy="0" result="blue"/>
+      <feOffset in="SourceGraphic" dx="0" dy="0" result="green"/>
+      <feColorMatrix in="red" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="redOnly"/>
+      <feColorMatrix in="blue" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="blueOnly"/>
+      <feColorMatrix in="green" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="greenOnly"/>
+      <feBlend in="redOnly" in2="greenOnly" mode="screen" result="rg"/>
+      <feBlend in="rg" in2="blueOnly" mode="screen"/>
+    </filter>
+    <filter id="heatDistortion">
+      <feTurbulence type="turbulence" baseFrequency="0.02 0.05" numOctaves="2" seed="2" result="turbulence">
+        <animate attributeName="baseFrequency" dur="3s" values="0.02 0.05;0.03 0.07;0.02 0.05" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO 1: THE DETONATION
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero-detonation" id="detonation">
+  <canvas id="det-particle-canvas"></canvas>
+  <div class="det-flash"></div>
+  <div class="det-shockwave"></div>
+  <div class="det-shockwave-2"></div>
+  <div class="det-heatwave"></div>
+  <div class="det-content">
+    <div class="det-pre">[ SYSTEM CRITICAL ]</div>
+    <h1 class="det-title"></h1>
+    <p class="det-sub">THE MOVE PRIOR TO THE MOVE</p>
+  </div>
+  <div class="det-vignette"></div>
+  <div class="det-grain"></div>
+  <!-- Embers generated by JS -->
+</section>
+
+<div class="section-break"><span class="label">Scroll ↓ — War Room</span></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO 2: THE WAR ROOM
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero-warroom" id="warroom">
+  <canvas class="wr-grid-canvas" id="wr-grid-canvas"></canvas>
+  <div class="wr-hud">
+    <div class="wr-corner-bracket tl"></div>
+    <div class="wr-corner-bracket tr"></div>
+    <div class="wr-corner-bracket bl"></div>
+    <div class="wr-corner-bracket br"></div>
+  </div>
+  <div class="wr-scanline"></div>
+  <div class="wr-alert-bar"></div>
+  <div class="wr-data-stream left"></div>
+  <div class="wr-data-stream right"></div>
+  <div class="wr-radar">
+    <div class="wr-radar-ring r1"></div>
+    <div class="wr-radar-ring r2"></div>
+    <div class="wr-radar-sweep"></div>
+    <div class="wr-radar-dot" style="top:30%;left:60%"></div>
+    <div class="wr-radar-dot" style="top:65%;left:35%"></div>
+    <div class="wr-radar-dot" style="top:45%;left:70%"></div>
+  </div>
+  <div class="wr-minicandle-container"><canvas id="wr-candle-canvas"></canvas></div>
+  <div class="wr-center">
+    <div class="wr-threat">⚠ THREAT LEVEL: <span class="blink">MAXIMUM</span></div>
+    <h1 class="wr-main-title"></h1>
+    <div class="wr-main-sub">EXECUTING PROTOCOL...<span class="typing-cursor"></span></div>
+  </div>
+  <div class="wr-price-ticker">
+    <div class="wr-ticker-item"><span class="symbol">SPX</span><span class="price">5,892.47</span><span class="change up">+2.31%</span></div>
+    <div class="wr-ticker-item"><span class="symbol">NQ</span><span class="price">21,340.12</span><span class="change up">+1.87%</span></div>
+    <div class="wr-ticker-item"><span class="symbol">VIX</span><span class="price">18.42</span><span class="change down">-12.4%</span></div>
+    <div class="wr-ticker-item"><span class="symbol">ES</span><span class="price">5,901.25</span><span class="change up">+0.94%</span></div>
+  </div>
+</section>
+
+<div class="section-break"><span class="label">Scroll ↓ — The Impact</span></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO 3: THE IMPACT
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero-impact" id="impact">
+  <canvas class="imp-dust-canvas" id="imp-dust-canvas"></canvas>
+  <svg class="imp-crack-svg" id="imp-crack-svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="imp-ground"><div class="imp-ground-line"></div></div>
+  <div class="imp-flash"></div>
+  <div class="imp-dust-cloud"></div>
+  <div class="imp-shockring"></div>
+  <div class="imp-shockring" style="border-color:rgba(255,150,50,0.3)"></div>
+  <div class="imp-content">
+    <h1 class="imp-title">IMPACT</h1>
+    <p class="imp-subtitle">When preparation meets opportunity</p>
+  </div>
+  <!-- Debris generated by JS -->
+</section>
+
+<div class="section-break"><span class="label">Scroll ↓ — Cinematic Trailer</span></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO 4: CINEMATIC BLACKOUT TRAILER
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero-trailer" id="trailer">
+  <div class="tr-grain"></div>
+  <div class="tr-film-bars top"></div>
+  <div class="tr-film-bars bottom"></div>
+  <div class="tr-blackout"></div>
+  <div class="tr-whip"></div>
+  <div class="tr-lens-flare"></div>
+  <div class="tr-lens-streak"></div>
+
+  <div class="tr-scene tr-scene-1">
+    <div class="tr-scene-text">They said the market<br>was <em>unpredictable</em></div>
+  </div>
+  <div class="tr-scene tr-scene-2">
+    <div class="tr-scene-text">They said no one could<br>see it <em>coming</em></div>
+  </div>
+  <div class="tr-scene tr-scene-3">
+    <div class="tr-scene-text"><em>They</em> were wrong</div>
+  </div>
+
+  <div class="tr-counter"></div>
+
+  <div class="tr-final">
+    <h1 class="tr-final-title">RTP</h1>
+    <div class="tr-final-tag">Revolution Trading Pros</div>
+    <button class="tr-final-cta">ENTER THE ARENA</button>
+  </div>
+</section>
+
+<div class="section-break"><span class="label">Scroll ↓ — Market Shatter</span></div>
+
+<!-- ════════════════════════════════════════════════════════════
+     HERO 5: MARKET SHATTER
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero-shatter" id="shatter">
+  <canvas class="sht-canvas" id="sht-canvas"></canvas>
+  <div class="sht-number-rain" id="sht-rain"></div>
+  <div class="sht-flash"></div>
+  <div class="sht-content">
+    <h1 class="sht-title">
+      <span class="sht-word">EXPLOSIVE</span>
+      <span class="sht-word">SWINGS</span>
+    </h1>
+    <div class="sht-rule"></div>
+    <div class="sht-sub">The setup. The signal. The execution.</div>
+  </div>
+</section>
+
+<div style="height:20vh;background:#000"></div>
+
+<script>
+gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
+
+/* ══════════════════════════════════════════════════════════════
+   UTILITY: Screen shake
+   ══════════════════════════════════════════════════════════════ */
+function screenShake(target, intensity = 20, duration = 0.6) {
+  const tl = gsap.timeline();
+  const steps = Math.floor(duration / 0.03);
+  for (let i = 0; i < steps; i++) {
+    const decay = 1 - (i / steps);
+    const x = (Math.random() - 0.5) * intensity * decay;
+    const y = (Math.random() - 0.5) * intensity * decay;
+    tl.set(target, { x, y }, i * 0.03);
+  }
+  tl.set(target, { x: 0, y: 0 });
+  return tl;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   HERO 1: THE DETONATION
+   ══════════════════════════════════════════════════════════════ */
+;(function() {
+  const canvas = document.getElementById('det-particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let w, h;
+  let detonated = false;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Particle class
+  class Particle {
+    constructor(x, y, type) {
+      this.x = x; this.y = y;
+      this.type = type; // 'spark', 'ember', 'smoke', 'debris'
+      const angle = Math.random() * Math.PI * 2;
+      const speed = type === 'spark' ? Math.random() * 18 + 8 :
+                    type === 'debris' ? Math.random() * 12 + 4 :
+                    type === 'smoke' ? Math.random() * 3 + 0.5 :
+                    Math.random() * 6 + 2;
+      this.vx = Math.cos(angle) * speed;
+      this.vy = Math.sin(angle) * speed - (type === 'smoke' ? 2 : 0);
+      this.life = 1;
+      this.decay = type === 'spark' ? 0.02 + Math.random() * 0.03 :
+                   type === 'smoke' ? 0.003 + Math.random() * 0.005 :
+                   0.008 + Math.random() * 0.015;
+      this.size = type === 'spark' ? Math.random() * 3 + 1 :
+                  type === 'smoke' ? Math.random() * 60 + 30 :
+                  type === 'debris' ? Math.random() * 5 + 2 :
+                  Math.random() * 4 + 2;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.rotSpeed = (Math.random() - 0.5) * 0.2;
+      this.gravity = type === 'smoke' ? -0.02 : type === 'spark' ? 0.15 : 0.1;
+      this.drag = type === 'smoke' ? 0.99 : 0.97;
+      this.r = type === 'spark' ? 255 : type === 'debris' ? 180 + Math.random()*50 : 200;
+      this.g = type === 'spark' ? 100 + Math.random()*100 : type === 'debris' ? 120+Math.random()*40 : 150;
+      this.b = type === 'spark' ? 0 : type === 'debris' ? 60 : 100;
+    }
+    update() {
+      this.vx *= this.drag;
+      this.vy *= this.drag;
+      this.vy += this.gravity;
+      this.x += this.vx;
+      this.y += this.vy;
+      this.rotation += this.rotSpeed;
+      this.life -= this.decay;
+    }
+    draw(ctx) {
+      if (this.life <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = this.life;
+      if (this.type === 'spark') {
+        ctx.beginPath();
+        const len = Math.sqrt(this.vx*this.vx + this.vy*this.vy) * 3;
+        const angle = Math.atan2(this.vy, this.vx);
+        ctx.moveTo(this.x - Math.cos(angle)*len, this.y - Math.sin(angle)*len);
+        ctx.lineTo(this.x, this.y);
+        ctx.strokeStyle = `rgba(${this.r},${this.g},${this.b},${this.life})`;
+        ctx.lineWidth = this.size * 0.6;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,255,200,${this.life*0.8})`;
+        ctx.fill();
+      } else if (this.type === 'smoke') {
+        ctx.globalAlpha = this.life * 0.15;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${this.r},${this.g},${this.b},1)`;
+        ctx.fill();
+      } else if (this.type === 'debris') {
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.fillStyle = `rgba(${this.r},${this.g},${this.b},${this.life})`;
+        ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size * 0.6);
+      } else {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${this.r},${this.g},${this.b},${this.life})`;
+        ctx.fill();
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = `rgba(255,100,0,${this.life*0.5})`;
+      }
+      ctx.restore();
+    }
+  }
+
+  function detonate() {
+    if (detonated) return;
+    detonated = true;
+    const cx = w / 2, cy = h / 2;
+
+    // Wave 1: Core explosion
+    for (let i = 0; i < 300; i++) particles.push(new Particle(cx, cy, 'spark'));
+    for (let i = 0; i < 80; i++) particles.push(new Particle(cx, cy, 'ember'));
+    for (let i = 0; i < 40; i++) particles.push(new Particle(cx, cy, 'smoke'));
+    for (let i = 0; i < 60; i++) particles.push(new Particle(cx, cy, 'debris'));
+
+    // Wave 2: Delayed secondary
+    setTimeout(() => {
+      for (let i = 0; i < 150; i++) particles.push(new Particle(cx + (Math.random()-0.5)*100, cy + (Math.random()-0.5)*100, 'spark'));
+      for (let i = 0; i < 30; i++) particles.push(new Particle(cx, cy, 'smoke'));
+    }, 200);
+
+    // Wave 3: Final embers
+    setTimeout(() => {
+      for (let i = 0; i < 80; i++) particles.push(new Particle(cx + (Math.random()-0.5)*200, cy + (Math.random()-0.5)*200, 'ember'));
+    }, 500);
+  }
+
+  // Ambient pre-explosion particles
+  let preParticles = [];
+  for (let i = 0; i < 50; i++) {
+    preParticles.push({
+      x: Math.random() * w, y: Math.random() * h,
+      size: Math.random() * 2 + 0.5, speed: Math.random() * 0.5 + 0.2,
+      opacity: Math.random() * 0.3
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+
+    // Pre-detonation ambient
+    if (!detonated) {
+      preParticles.forEach(p => {
+        p.y -= p.speed;
+        if (p.y < 0) { p.y = h; p.x = Math.random() * w; }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(255,80,0,${p.opacity})`;
+        ctx.fill();
+      });
+    }
+
+    // Explosion particles
+    particles = particles.filter(p => p.life > 0);
+    particles.forEach(p => { p.update(); p.draw(ctx); });
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Split text
+  const titleEl = document.querySelector('.det-title');
+  const text = 'DETONATE';
+  titleEl.innerHTML = text.split('').map(c => `<span class="det-char">${c}</span>`).join('');
+
+  // Create floating embers
+  const section = document.querySelector('.hero-detonation');
+  for (let i = 0; i < 25; i++) {
+    const ember = document.createElement('div');
+    ember.className = 'det-ember';
+    ember.style.left = Math.random() * 100 + '%';
+    ember.style.top = Math.random() * 100 + '%';
+    section.appendChild(ember);
+  }
+
+  // MASTER TIMELINE
+  const master = gsap.timeline({ delay: 1.2 });
+
+  // Phase 1: Pre-text
+  master.to('.det-pre', { opacity: 1, duration: 0.8, ease: 'power2.out' });
+
+  // Phase 2: Buildup - screen tension
+  master.to('.det-pre', {
+    textShadow: '0 0 40px rgba(255,60,0,1)', scale: 1.05,
+    duration: 1.5, ease: 'power2.in'
+  }, '+=0.5');
+
+  // Phase 3: THE DETONATION
+  master.add(() => detonate(), '+=0.3');
+
+  // Flash
+  master.to('.det-flash', { opacity: 1, duration: 0.05 }, '<');
+  master.to('.det-flash', { opacity: 0, duration: 0.8, ease: 'power4.out' }, '<+=0.05');
+
+  // Chromatic aberration pulse
+  master.to('.det-content', {
+    filter: 'url(#chromatic)',
+    duration: 0.1
+  }, '<');
+
+  // Screen shake
+  master.add(screenShake('.det-content', 30, 0.8), '<');
+  master.add(screenShake('.det-vignette', 15, 0.6), '<');
+
+  // Shockwave rings
+  master.to('.det-shockwave', {
+    width: '150vmax', height: '150vmax', opacity: 0.8,
+    duration: 0.01
+  }, '<');
+  master.to('.det-shockwave', {
+    width: '250vmax', height: '250vmax', opacity: 0,
+    borderWidth: '1px', duration: 1.2, ease: 'power2.out'
+  });
+
+  master.to('.det-shockwave-2', {
+    width: '200vmax', height: '200vmax', opacity: 0.5,
+    duration: 0.01
+  }, '<-0.8');
+  master.to('.det-shockwave-2', {
+    width: '300vmax', height: '300vmax', opacity: 0,
+    duration: 1.5, ease: 'power2.out'
+  });
+
+  // Heat distortion
+  master.to('.det-heatwave', { opacity: 0.6, duration: 0.3 }, '<-1');
+  master.to('.det-heatwave', { opacity: 0, duration: 3 });
+
+  // Characters emerge from blast
+  master.to('.det-char', {
+    opacity: 1, filter: 'blur(0px)', scale: 1, y: 0,
+    duration: 1.2, stagger: { each: 0.06, from: 'center' },
+    ease: 'power4.out'
+  }, '<-0.5');
+
+  // Subtitle
+  master.to('.det-sub', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.4');
+
+  // Embers float up
+  master.to('.det-ember', {
+    opacity: () => Math.random() * 0.8 + 0.2,
+    y: () => -(Math.random() * 300 + 100),
+    x: () => (Math.random() - 0.5) * 200,
+    duration: () => Math.random() * 3 + 2,
+    stagger: { each: 0.08, from: 'random' },
+    ease: 'power1.out',
+    repeat: -1,
+    repeatDelay: 0.5
+  }, '<');
+
+  // Pre text fade out
+  master.to('.det-pre', { opacity: 0.4, duration: 2 }, '<');
+})();
+
+
+/* ══════════════════════════════════════════════════════════════
+   HERO 2: THE WAR ROOM
+   ══════════════════════════════════════════════════════════════ */
+;(function() {
+  const gridCanvas = document.getElementById('wr-grid-canvas');
+  const gridCtx = gridCanvas.getContext('2d');
+  let gw, gh;
+
+  function resizeGrid() {
+    gw = gridCanvas.width = window.innerWidth;
+    gh = gridCanvas.height = window.innerHeight;
+  }
+  resizeGrid();
+  window.addEventListener('resize', resizeGrid);
+
+  let gridAlpha = { val: 0 };
+  let pulsePhase = 0;
+
+  function drawGrid() {
+    gridCtx.clearRect(0, 0, gw, gh);
+    if (gridAlpha.val <= 0) { requestAnimationFrame(drawGrid); return; }
+
+    pulsePhase += 0.005;
+    const spacing = 50;
+    const cx = gw/2, cy = gh/2;
+
+    // Perspective grid
+    gridCtx.strokeStyle = `rgba(0,255,136,${0.04 * gridAlpha.val})`;
+    gridCtx.lineWidth = 0.5;
+
+    // Horizontal lines with perspective
+    for (let y = 0; y < gh; y += spacing) {
+      const distFromCenter = Math.abs(y - cy) / (gh/2);
+      const wave = Math.sin(pulsePhase + y * 0.01) * 3 * distFromCenter;
+      gridCtx.beginPath();
+      gridCtx.moveTo(0, y + wave);
+      gridCtx.lineTo(gw, y + wave);
+      gridCtx.stroke();
+    }
+
+    // Vertical lines
+    for (let x = 0; x < gw; x += spacing) {
+      const distFromCenter = Math.abs(x - cx) / (gw/2);
+      const wave = Math.sin(pulsePhase + x * 0.01) * 3 * distFromCenter;
+      gridCtx.beginPath();
+      gridCtx.moveTo(x + wave, 0);
+      gridCtx.lineTo(x + wave, gh);
+      gridCtx.stroke();
+    }
+
+    // Center crosshair
+    gridCtx.strokeStyle = `rgba(0,255,136,${0.15 * gridAlpha.val})`;
+    gridCtx.lineWidth = 1;
+    gridCtx.setLineDash([8, 8]);
+    gridCtx.beginPath();
+    gridCtx.moveTo(cx, 0); gridCtx.lineTo(cx, gh);
+    gridCtx.stroke();
+    gridCtx.beginPath();
+    gridCtx.moveTo(0, cy); gridCtx.lineTo(gw, cy);
+    gridCtx.stroke();
+    gridCtx.setLineDash([]);
+
+    // Pulse ring from center
+    const pulseRadius = ((pulsePhase * 80) % (Math.max(gw, gh) * 0.8));
+    gridCtx.beginPath();
+    gridCtx.arc(cx, cy, pulseRadius, 0, Math.PI * 2);
+    gridCtx.strokeStyle = `rgba(0,255,136,${(1 - pulseRadius / (Math.max(gw,gh)*0.8)) * 0.1 * gridAlpha.val})`;
+    gridCtx.lineWidth = 1;
+    gridCtx.stroke();
+
+    requestAnimationFrame(drawGrid);
+  }
+  drawGrid();
+
+  // Mini candlestick chart
+  const candleCanvas = document.getElementById('wr-candle-canvas');
+  const cctx = candleCanvas.getContext('2d');
+  candleCanvas.width = 200; candleCanvas.height = 250;
+  let candles = [];
+  let candleAlpha = { val: 0 };
+
+  function generateCandles() {
+    candles = [];
+    let price = 100;
+    for (let i = 0; i < 30; i++) {
+      const open = price;
+      const close = price + (Math.random() - 0.45) * 8;
+      const high = Math.max(open, close) + Math.random() * 4;
+      const low = Math.min(open, close) - Math.random() * 4;
+      candles.push({ open, close, high, low, bull: close > open });
+      price = close;
+    }
+  }
+  generateCandles();
+
+  function drawCandles() {
+    cctx.clearRect(0, 0, 200, 250);
+    if (candleAlpha.val <= 0) { requestAnimationFrame(drawCandles); return; }
+
+    const minP = Math.min(...candles.map(c => c.low));
+    const maxP = Math.max(...candles.map(c => c.high));
+    const range = maxP - minP;
+    const cw = 5, gap = 1.5;
+
+    candles.forEach((c, i) => {
+      const x = i * (cw + gap);
+      const oY = 250 - ((c.open - minP) / range) * 230 - 10;
+      const cY = 250 - ((c.close - minP) / range) * 230 - 10;
+      const hY = 250 - ((c.high - minP) / range) * 230 - 10;
+      const lY = 250 - ((c.low - minP) / range) * 230 - 10;
+
+      cctx.globalAlpha = candleAlpha.val * 0.7;
+      // Wick
+      cctx.strokeStyle = c.bull ? 'rgba(0,255,136,0.5)' : 'rgba(255,51,51,0.5)';
+      cctx.lineWidth = 1;
+      cctx.beginPath();
+      cctx.moveTo(x + cw/2, hY);
+      cctx.lineTo(x + cw/2, lY);
+      cctx.stroke();
+      // Body
+      cctx.fillStyle = c.bull ? 'rgba(0,255,136,0.6)' : 'rgba(255,51,51,0.6)';
+      cctx.fillRect(x, Math.min(oY, cY), cw, Math.abs(cY - oY) || 1);
+    });
+    cctx.globalAlpha = 1;
+    requestAnimationFrame(drawCandles);
+  }
+  drawCandles();
+
+  // Data stream content
+  function generateDataStream(el) {
+    const lines = [];
+    const symbols = ['ES','NQ','SPX','VIX','AAPL','TSLA','NVDA','AMZN'];
+    for (let i = 0; i < 60; i++) {
+      const sym = symbols[Math.floor(Math.random()*symbols.length)];
+      const price = (Math.random()*500+100).toFixed(2);
+      const change = ((Math.random()-0.45)*10).toFixed(2);
+      const prefix = parseFloat(change) >= 0 ? '+' : '';
+      lines.push(`${sym} ${price} ${prefix}${change}`);
+    }
+    el.textContent = lines.join('\n');
+  }
+
+  const leftStream = document.querySelector('.wr-data-stream.left');
+  const rightStream = document.querySelector('.wr-data-stream.right');
+  generateDataStream(leftStream);
+  generateDataStream(rightStream);
+
+  // Animate streams scrolling
+  function scrollStream(el, speed) {
+    let y = 0;
+    function tick() {
+      y -= speed;
+      if (y < -el.scrollHeight / 2) y = 0;
+      el.style.transform = `translateY(${y}px)`;
+      requestAnimationFrame(tick);
+    }
+    tick();
+  }
+
+  // Title chars
+  const wrTitle = document.querySelector('.wr-main-title');
+  const wrText = 'COMMAND';
+  wrTitle.innerHTML = wrText.split('').map(c => `<span class="wr-title-char">${c}</span>`).join('');
+
+  // MASTER TIMELINE
+  const wrTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#warroom',
+      start: 'top 70%',
+      toggleActions: 'play none none none'
+    }
+  });
+
+  // Grid fade in
+  wrTl.to(gridAlpha, { val: 1, duration: 2, ease: 'power2.out' });
+
+  // Alert bar flash
+  wrTl.to('.wr-alert-bar', { opacity: 1, scaleX: 1, duration: 0.3, ease: 'power4.out' }, 0.5);
+  wrTl.to('.wr-alert-bar', { opacity: 0, duration: 0.3 }, 1);
+  wrTl.to('.wr-alert-bar', { opacity: 1, duration: 0.15 }, 1.5);
+  wrTl.to('.wr-alert-bar', { opacity: 0, duration: 0.5 }, 1.8);
+
+  // Corner brackets
+  wrTl.to('.wr-corner-bracket', {
+    opacity: 1, duration: 0.3, stagger: 0.08
+  }, 0.8);
+
+  // Scanline sweep
+  wrTl.to('.wr-scanline', {
+    top: '100%', duration: 2, ease: 'none', repeat: -1
+  }, 0);
+
+  // Threat text
+  wrTl.to('.wr-threat', { opacity: 1, duration: 0.3 }, 1.5);
+  wrTl.add(() => {
+    document.querySelector('.wr-threat .blink').style.animation = 'wrBlink 0.5s infinite';
+  }, 1.5);
+
+  // Title chars - glitch in
+  wrTl.to('.wr-title-char', {
+    opacity: 1, y: 0, duration: 0.08, stagger: 0.06,
+    ease: 'none',
+    onStart: function() {
+      // Add screen shake per char
+      gsap.utils.toArray('.wr-title-char').forEach((ch, i) => {
+        gsap.delayedCall(i * 0.06, () => {
+          gsap.fromTo(ch, { x: (Math.random()-0.5)*20 }, { x: 0, duration: 0.15 });
+        });
+      });
+    }
+  }, 2);
+
+  // Screen shake on title complete
+  wrTl.add(screenShake('.wr-center', 8, 0.3), 2.5);
+
+  // Sub text typing
+  wrTl.to('.wr-main-sub', { opacity: 1, duration: 0.5 }, 2.8);
+
+  // Typing cursor blink
+  gsap.to('.typing-cursor', {
+    opacity: 0, duration: 0.4, repeat: -1, yoyo: true, ease: 'steps(1)'
+  });
+
+  // Data streams
+  wrTl.to('.wr-data-stream', { opacity: 1, duration: 1 }, 1.5);
+  wrTl.add(() => { scrollStream(leftStream, 0.5); scrollStream(rightStream, 0.7); }, 1.5);
+
+  // Radar
+  wrTl.to('.wr-radar', { opacity: 1, duration: 0.8 }, 2);
+  gsap.to('.wr-radar-sweep', {
+    rotation: 360, duration: 3, ease: 'none', repeat: -1, transformOrigin: 'left center'
+  });
+  wrTl.to('.wr-radar-dot', {
+    opacity: 1, duration: 0.2, stagger: 0.3,
+    onComplete: () => {
+      gsap.to('.wr-radar-dot', {
+        scale: 1.5, opacity: 0.5, duration: 0.8,
+        repeat: -1, yoyo: true, stagger: 0.2
+      });
+    }
+  }, 2.5);
+
+  // Candle chart
+  wrTl.to('.wr-minicandle-container', { opacity: 1, duration: 1 }, 2);
+  wrTl.to(candleAlpha, { val: 1, duration: 1 }, 2);
+
+  // Price ticker
+  wrTl.to('.wr-price-ticker', { opacity: 1, duration: 0.8 }, 3);
+
+  // Ambient ticker price changes
+  setInterval(() => {
+    document.querySelectorAll('.wr-ticker-item .price').forEach(el => {
+      const base = parseFloat(el.textContent.replace(',',''));
+      const change = (Math.random() - 0.48) * 5;
+      const newPrice = (base + change).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+      el.textContent = newPrice;
+    });
+  }, 2000);
+})();
+
+
+/* ══════════════════════════════════════════════════════════════
+   HERO 3: THE IMPACT
+   ══════════════════════════════════════════════════════════════ */
+;(function() {
+  const canvas = document.getElementById('imp-dust-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  let dustParticles = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function spawnDust(cx, cy, count) {
+    for (let i = 0; i < count; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 8 + 2;
+      dustParticles.push({
+        x: cx + (Math.random()-0.5) * 100,
+        y: cy + (Math.random()-0.5) * 50,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed * 0.5 - Math.random() * 3,
+        size: Math.random() * 40 + 10,
+        life: 1,
+        decay: 0.005 + Math.random() * 0.008,
+        gray: Math.floor(Math.random() * 100 + 100)
+      });
+    }
+  }
+
+  function animateDust() {
+    ctx.clearRect(0, 0, w, h);
+    dustParticles = dustParticles.filter(p => p.life > 0);
+    dustParticles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.98;
+      p.vy *= 0.98;
+      p.vy += 0.02;
+      p.life -= p.decay;
+      p.size *= 1.003;
+      ctx.globalAlpha = p.life * 0.2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgb(${p.gray},${p.gray-20},${p.gray-40})`;
+      ctx.fill();
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animateDust);
+  }
+  animateDust();
+
+  // Generate crack paths
+  const crackSvg = document.getElementById('imp-crack-svg');
+  function generateCracks(cx, cy) {
+    const paths = [];
+    for (let i = 0; i < 12; i++) {
+      let x = cx, y = cy;
+      let angle = (Math.PI * 2 / 12) * i + (Math.random()-0.5) * 0.5;
+      let d = `M${x},${y}`;
+      const segments = Math.floor(Math.random() * 8 + 4);
+      for (let j = 0; j < segments; j++) {
+        const len = Math.random() * 80 + 30;
+        angle += (Math.random() - 0.5) * 0.8;
+        x += Math.cos(angle) * len;
+        y += Math.sin(angle) * len;
+        d += ` L${x},${y}`;
+        // Branch
+        if (Math.random() > 0.6) {
+          let bx = x, by = y;
+          const bAngle = angle + (Math.random()-0.5) * 1.2;
+          const bLen = Math.random() * 50 + 20;
+          bx += Math.cos(bAngle) * bLen;
+          by += Math.sin(bAngle) * bLen;
+          const branch = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          branch.setAttribute('d', `M${x},${y} L${bx},${by}`);
+          branch.setAttribute('fill', 'none');
+          branch.setAttribute('stroke', 'rgba(255,200,150,0.3)');
+          branch.setAttribute('stroke-width', '1');
+          branch.style.strokeDasharray = branch.getTotalLength ? '1000' : '1000';
+          branch.style.strokeDashoffset = '1000';
+          crackSvg.appendChild(branch);
+          paths.push(branch);
+        }
+      }
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', d);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'rgba(255,180,120,0.4)');
+      path.setAttribute('stroke-width', '1.5');
+      const totalLen = 2000;
+      path.style.strokeDasharray = totalLen;
+      path.style.strokeDashoffset = totalLen;
+      crackSvg.appendChild(path);
+      paths.push(path);
+    }
+    return paths;
+  }
+
+  // Create debris elements
+  const section = document.querySelector('.hero-impact');
+  for (let i = 0; i < 30; i++) {
+    const d = document.createElement('div');
+    d.className = 'imp-debris';
+    d.style.width = Math.random() * 12 + 3 + 'px';
+    d.style.height = Math.random() * 8 + 2 + 'px';
+    d.style.left = '50%';
+    d.style.top = '55%';
+    d.style.borderRadius = Math.random() > 0.5 ? '1px' : '0';
+    section.appendChild(d);
+  }
+
+  const crackPaths = generateCracks(960, 540);
+
+  // IMPACT TIMELINE
+  const impTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#impact',
+      start: 'top 60%',
+      toggleActions: 'play none none none'
+    }
+  });
+
+  // Title SLAMS down
+  impTl.to('.imp-title', {
+    opacity: 1, y: 0, scale: 1, duration: 0.15,
+    ease: 'power4.in',
+  });
+
+  // Flash on impact
+  impTl.to('.imp-flash', { opacity: 1, duration: 0.05 }, '<');
+  impTl.to('.imp-flash', { opacity: 0, duration: 0.6, ease: 'power3.out' });
+
+  // SCREEN SHAKE — heavy
+  impTl.add(screenShake('.imp-content', 40, 0.8), '<');
+
+  // Shockwave rings
+  const rings = gsap.utils.toArray('.imp-shockring');
+  rings.forEach((ring, i) => {
+    impTl.to(ring, {
+      width: '200vmax', height: '200vmax', opacity: 0.6,
+      duration: 0.01
+    }, `<+=${i * 0.15}`);
+    impTl.to(ring, {
+      width: '300vmax', height: '300vmax', opacity: 0,
+      duration: 1.2, ease: 'power2.out'
+    });
+  });
+
+  // Dust cloud
+  impTl.to('.imp-dust-cloud', {
+    width: '120vw', opacity: 0.7, duration: 0.8, ease: 'power2.out'
+  }, '<');
+  impTl.to('.imp-dust-cloud', { opacity: 0, duration: 2 }, '+=0.5');
+
+  // Spawn canvas dust
+  impTl.add(() => spawnDust(w/2, h * 0.55, 200), '<-0.8');
+
+  // Crack propagation
+  impTl.to(crackPaths, {
+    strokeDashoffset: 0, duration: 0.6, stagger: 0.03, ease: 'power2.out'
+  }, '<');
+
+  // Ground line
+  impTl.to('.imp-ground-line', { scaleX: 1, duration: 0.3, ease: 'power4.out' }, '<');
+
+  // Debris flying outward
+  impTl.to('.imp-debris', {
+    opacity: 1,
+    x: () => (Math.random() - 0.5) * window.innerWidth * 0.8,
+    y: () => (Math.random() - 0.5) * window.innerHeight * 0.6,
+    rotation: () => Math.random() * 720 - 360,
+    duration: 1, ease: 'power2.out',
+    stagger: { each: 0.02, from: 'random' }
+  }, '<');
+  impTl.to('.imp-debris', { opacity: 0, duration: 0.5 }, '+=0.3');
+
+  // Title settles with bounce
+  impTl.to('.imp-title', {
+    textShadow: '0 5px 30px rgba(0,0,0,0.5)',
+    duration: 1, ease: 'elastic.out(1.2, 0.4)'
+  }, '<-1');
+
+  // Subtitle
+  impTl.to('.imp-subtitle', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.5');
+})();
+
+
+/* ══════════════════════════════════════════════════════════════
+   HERO 4: CINEMATIC BLACKOUT TRAILER
+   ══════════════════════════════════════════════════════════════ */
+;(function() {
+  const trTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#trailer',
+      start: 'top 50%',
+      toggleActions: 'play none none none'
+    }
+  });
+
+  // Film bars (cinematic aspect ratio)
+  trTl.to('.tr-film-bars.top', { height: '12%', duration: 0.8, ease: 'power3.out' }, 0);
+  trTl.to('.tr-film-bars.bottom', { height: '12%', duration: 0.8, ease: 'power3.out' }, 0);
+
+  // Scene 1: Fade in
+  trTl.to('.tr-blackout', { opacity: 0, duration: 0.8 }, 0.5);
+  trTl.to('.tr-scene-1', { opacity: 1, duration: 0.5 }, 1);
+
+  // Slow zoom on scene 1
+  trTl.fromTo('.tr-scene-1', { scale: 1 }, {
+    scale: 1.05, duration: 2.5, ease: 'none'
+  }, 1);
+
+  // Blackout cut
+  trTl.to('.tr-blackout', { opacity: 1, duration: 0.08 }, 3.5);
+  trTl.set('.tr-scene-1', { opacity: 0 }, 3.55);
+
+  // Scene 2
+  trTl.to('.tr-blackout', { opacity: 0, duration: 0.08 }, 4);
+  trTl.to('.tr-scene-2', { opacity: 1, duration: 0.05 }, 4);
+  trTl.fromTo('.tr-scene-2', { scale: 1.1 }, { scale: 1, duration: 2, ease: 'power2.out' }, 4);
+
+  // Whip transition
+  trTl.to('.tr-whip', { opacity: 1, duration: 0.08 }, 6);
+  trTl.to('.tr-whip', { opacity: 0, duration: 0.15 }, 6.12);
+  trTl.set('.tr-scene-2', { opacity: 0 }, 6.1);
+
+  // Scene 3 — fast cut
+  trTl.to('.tr-scene-3', { opacity: 1, duration: 0.05 }, 6.3);
+  trTl.add(screenShake('.tr-scene-3', 10, 0.3), 6.3);
+
+  // Blackout to countdown
+  trTl.to(['.tr-scene-3'], { opacity: 0, duration: 0.08 }, 8);
+  trTl.to('.tr-blackout', { opacity: 1, duration: 0.05 }, 8);
+
+  // Countdown: 3, 2, 1
+  const counts = ['3', '2', '1'];
+  counts.forEach((num, i) => {
+    const t = 8.5 + i * 0.8;
+    trTl.set('.tr-counter', { textContent: num, opacity: 0, scale: 2 }, t);
+    trTl.to('.tr-counter', { opacity: 1, scale: 1, duration: 0.15, ease: 'power4.out' }, t);
+    trTl.to('.tr-counter', { opacity: 0, duration: 0.2 }, t + 0.5);
+    // Flash between
+    trTl.to('.tr-blackout', { opacity: 0.5, duration: 0.05 }, t);
+    trTl.to('.tr-blackout', { opacity: 1, duration: 0.1 }, t + 0.15);
+  });
+
+  // FINAL SLAM
+  const slamTime = 11;
+  trTl.to('.tr-blackout', { opacity: 0, duration: 0.05 }, slamTime);
+
+  // Title zooms from huge blur to sharp
+  trTl.to('.tr-final-title', {
+    opacity: 1, scale: 1, filter: 'blur(0px)',
+    duration: 0.4, ease: 'power4.out'
+  }, slamTime);
+
+  // Heavy screen shake
+  trTl.add(screenShake('.tr-final', 25, 0.6), slamTime);
+
+  // Flash
+  trTl.to('.tr-blackout', { opacity: 0.8, duration: 0.03 }, slamTime);
+  trTl.to('.tr-blackout', { opacity: 0, duration: 0.5, ease: 'power3.out' }, slamTime + 0.03);
+
+  // Lens flare
+  trTl.to('.tr-lens-flare', {
+    opacity: 1, width: '600px', height: '600px', duration: 0.3, ease: 'power2.out'
+  }, slamTime + 0.1);
+  trTl.to('.tr-lens-flare', {
+    opacity: 0, width: '100px', height: '100px', duration: 1.5, ease: 'power2.in'
+  }, slamTime + 0.5);
+
+  // Lens streak
+  trTl.to('.tr-lens-streak', { opacity: 1, duration: 0.1 }, slamTime + 0.15);
+  trTl.to('.tr-lens-streak', { opacity: 0, duration: 1 }, slamTime + 0.4);
+
+  // Tagline
+  trTl.to('.tr-final-tag', { opacity: 1, duration: 0.8, ease: 'power2.out' }, slamTime + 0.8);
+
+  // CTA button
+  trTl.to('.tr-final-cta', { opacity: 1, duration: 0.8, ease: 'power2.out' }, slamTime + 1.2);
+})();
+
+
+/* ══════════════════════════════════════════════════════════════
+   HERO 5: MARKET SHATTER
+   ══════════════════════════════════════════════════════════════ */
+;(function() {
+  const canvas = document.getElementById('sht-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  let shards = [];
+  let candles = [];
+  let phase = 'build'; // build | shatter | done
+  let buildProgress = 0;
+  let shatterTriggered = false;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Generate candlestick data
+  function genCandles() {
+    candles = [];
+    let price = 150;
+    for (let i = 0; i < 40; i++) {
+      const open = price;
+      const volatility = 3 + Math.random() * 8;
+      const close = price + (Math.random() - 0.42) * volatility;
+      const high = Math.max(open, close) + Math.random() * volatility * 0.5;
+      const low = Math.min(open, close) - Math.random() * volatility * 0.5;
+      candles.push({ open, close, high, low, bull: close >= open, built: false });
+      price = close;
+    }
+  }
+  genCandles();
+
+  class Shard {
+    constructor(x, y, cw, ch, color) {
+      this.x = x; this.y = y;
+      this.ox = x; this.oy = y;
+      this.w = cw; this.h = ch;
+      this.color = color;
+      const angle = Math.atan2(y - h/2, x - w/2) + (Math.random()-0.5) * 0.5;
+      const speed = Math.random() * 20 + 10;
+      this.vx = Math.cos(angle) * speed;
+      this.vy = Math.sin(angle) * speed;
+      this.rotation = 0;
+      this.rotSpeed = (Math.random()-0.5) * 0.3;
+      this.life = 1;
+      this.decay = 0.008 + Math.random() * 0.01;
+      this.gravity = 0.15;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      this.vy += this.gravity;
+      this.vx *= 0.99;
+      this.rotation += this.rotSpeed;
+      this.life -= this.decay;
+    }
+    draw(ctx) {
+      if (this.life <= 0) return;
+      ctx.save();
+      ctx.globalAlpha = this.life;
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.rotation);
+      ctx.fillStyle = this.color;
+      ctx.fillRect(-this.w/2, -this.h/2, this.w, this.h);
+      ctx.restore();
+    }
+  }
+
+  function shatterChart() {
+    const minP = Math.min(...candles.map(c => c.low));
+    const maxP = Math.max(...candles.map(c => c.high));
+    const range = maxP - minP;
+    const cw = 12, gap = 4;
+    const startX = w/2 - (candles.length * (cw + gap)) / 2;
+
+    candles.forEach((c, i) => {
+      const x = startX + i * (cw + gap);
+      const oY = h/2 + 100 - ((c.open - minP) / range) * 300;
+      const cY = h/2 + 100 - ((c.close - minP) / range) * 300;
+      const bodyH = Math.abs(cY - oY) || 2;
+      const color = c.bull ? '#00ff88' : '#ff3333';
+
+      // Break each candle into multiple shards
+      for (let j = 0; j < 4; j++) {
+        shards.push(new Shard(
+          x + Math.random() * cw,
+          Math.min(oY, cY) + Math.random() * bodyH,
+          cw * 0.6, bodyH * 0.3,
+          color
+        ));
+      }
+    });
+  }
+
+  function drawChart() {
+    if (phase === 'done') return;
+
+    const minP = Math.min(...candles.map(c => c.low));
+    const maxP = Math.max(...candles.map(c => c.high));
+    const range = maxP - minP;
+    const cw = 12, gap = 4;
+    const startX = w/2 - (candles.length * (cw + gap)) / 2;
+    const builtCount = Math.floor(buildProgress * candles.length);
+
+    for (let i = 0; i < builtCount && i < candles.length; i++) {
+      const c = candles[i];
+      const x = startX + i * (cw + gap);
+      const oY = h/2 + 100 - ((c.open - minP) / range) * 300;
+      const cY = h/2 + 100 - ((c.close - minP) / range) * 300;
+      const hY = h/2 + 100 - ((c.high - minP) / range) * 300;
+      const lY = h/2 + 100 - ((c.low - minP) / range) * 300;
+
+      ctx.strokeStyle = c.bull ? 'rgba(0,255,136,0.4)' : 'rgba(255,51,51,0.4)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x + cw/2, hY);
+      ctx.lineTo(x + cw/2, lY);
+      ctx.stroke();
+
+      ctx.fillStyle = c.bull ? '#00ff88' : '#ff3333';
+      ctx.globalAlpha = 0.7;
+      ctx.fillRect(x, Math.min(oY, cY), cw, Math.abs(cY - oY) || 2);
+      ctx.globalAlpha = 1;
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+
+    if (phase === 'build') {
+      drawChart();
+    }
+
+    if (phase === 'shatter') {
+      shards = shards.filter(s => s.life > 0);
+      shards.forEach(s => { s.update(); s.draw(ctx); });
+      if (shards.length === 0) phase = 'done';
+    }
+
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  // Number rain
+  const rainContainer = document.getElementById('sht-rain');
+  function spawnNumbers() {
+    for (let i = 0; i < 80; i++) {
+      const num = document.createElement('div');
+      num.className = 'sht-number' + (Math.random() > 0.5 ? ' red' : '');
+      num.textContent = (Math.random() * 1000).toFixed(2);
+      num.style.left = Math.random() * 100 + '%';
+      num.style.top = -20 + '%';
+      num.style.fontSize = (Math.random() * 0.5 + 0.5) + 'rem';
+      rainContainer.appendChild(num);
+    }
+  }
+  spawnNumbers();
+
+  // SHATTER TIMELINE
+  const shtTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#shatter',
+      start: 'top 50%',
+      toggleActions: 'play none none none'
+    }
+  });
+
+  // Phase 1: Build chart candle by candle
+  shtTl.to({ val: 0 }, {
+    val: 1, duration: 3, ease: 'power2.out',
+    onUpdate: function() { buildProgress = this.targets()[0].val; }
+  });
+
+  // Phase 2: SHATTER
+  shtTl.add(() => {
+    phase = 'shatter';
+    shatterChart();
+  }, '+=0.3');
+
+  // Flash
+  shtTl.to('.sht-flash', { opacity: 0.8, duration: 0.05 }, '<');
+  shtTl.to('.sht-flash', { opacity: 0, duration: 0.4, ease: 'power3.out' });
+
+  // Number rain
+  shtTl.to('.sht-number', {
+    opacity: () => Math.random() * 0.4 + 0.1,
+    y: () => window.innerHeight * 1.2,
+    duration: () => Math.random() * 2 + 1.5,
+    stagger: { each: 0.02, from: 'random' },
+    ease: 'none'
+  }, '<');
+
+  // Phase 3: Content reveals
+  shtTl.to('.sht-content', { opacity: 1, duration: 0.5 }, '+=0.5');
+  shtTl.to('.sht-word', {
+    opacity: 1, x: 0, filter: 'blur(0px)',
+    duration: 0.8, stagger: 0.2, ease: 'power4.out'
+  }, '<');
+
+  // Rule line
+  shtTl.to('.sht-rule', { width: '200px', duration: 0.6, ease: 'power3.out' }, '-=0.3');
+
+  // Subtitle
+  shtTl.to('.sht-sub', { opacity: 1, duration: 0.6 }, '-=0.2');
+})();
+
+</script>
+</body>
+</html>
