@@ -1,24 +1,7 @@
 <script lang="ts">
 	import AnimationNav from '$lib/components/AnimationNav.svelte';
-	import TradingUniverses from '$lib/components/TradingUniverses.svelte';
+	import TradingUniversesSet2 from '$lib/components/TradingUniversesSet2.svelte';
 </script>
 
-<!-- Only show last 5 via CSS -->
-<div class="five-only">
-	<TradingUniverses />
-</div>
+<TradingUniversesSet2 />
 <AnimationNav />
-
-<style>
-	.five-only :global(#h1),
-	.five-only :global(#h2),
-	.five-only :global(#h3),
-	.five-only :global(#h4),
-	.five-only :global(#h5),
-	.five-only :global(#h1 + .sp),
-	.five-only :global(#h2 + .sp),
-	.five-only :global(#h3 + .sp),
-	.five-only :global(#h4 + .sp) {
-		display: none !important;
-	}
-</style>
