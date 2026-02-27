@@ -16,7 +16,11 @@
 		{ id: 'magnum-opus-1', name: 'Magnum Opus (1-3)', path: '/magnum-opus/1' },
 		{ id: 'magnum-opus-2', name: 'Magnum Opus (4-6)', path: '/magnum-opus/2' },
 		{ id: 'magnum-opus-3', name: 'Magnum Opus (7-9)', path: '/magnum-opus/3' },
-		{ id: 'magnum-opus-4', name: 'Magnum Opus (10)', path: '/magnum-opus/4' }
+		{ id: 'magnum-opus-4', name: 'Magnum Opus (10)', path: '/magnum-opus/4' },
+		{ id: 'rtp-magnum-opus-1', name: 'RTP Magnum Opus (1-3)', path: '/rtp-magnum-opus/1' },
+		{ id: 'rtp-magnum-opus-2', name: 'RTP Magnum Opus (4-6)', path: '/rtp-magnum-opus/2' },
+		{ id: 'rtp-magnum-opus-3', name: 'RTP Magnum Opus (7-9)', path: '/rtp-magnum-opus/3' },
+		{ id: 'rtp-magnum-opus-4', name: 'RTP Magnum Opus (10)', path: '/rtp-magnum-opus/4' }
 	];
 
 	let currentIndex = $derived(sets.findIndex(s => s.path === page.url.pathname) ?? -1);
