@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>REVOLUTION TRADING PROS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,700;1,300&family=Anton&family=Bebas+Neue&family=Oswald:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#000;overflow-x:hidden}
+body{color:#fff;font-family:'JetBrains Mono',monospace}
+.S{position:relative;width:100%;height:100vh;overflow:hidden}
+.S canvas{position:absolute;inset:0}
+.z1{z-index:1}.z2{z-index:2}.z3{z-index:3}.z4{z-index:4}
+.C{position:relative;z-index:20;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;pointer-events:none}
+.F{position:absolute;inset:0;z-index:30;pointer-events:none;opacity:0}
+.BK{position:absolute;inset:0;z-index:35;pointer-events:none;background:#000;opacity:0}
+.T{font-family:'Anton',sans-serif;font-size:clamp(3.5rem,13vw,12rem);line-height:.85;opacity:0;letter-spacing:-.01em}
+.U{font-family:'Orbitron',sans-serif;font-size:clamp(.4rem,1vw,.65rem);letter-spacing:.7em;opacity:0;margin-top:15px}
+.V{font-size:.45rem;letter-spacing:.35em;opacity:0;margin-top:22px;max-width:700px;line-height:1.8}
+.L{position:absolute;top:20px;left:25px;z-index:40;font-size:.38rem;letter-spacing:.7em;text-transform:uppercase;opacity:0}
+</style>
+</head>
+<body>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const W=()=>window.innerWidth,H=()=>window.innerHeight;
+let MX=W()/2,MY=H()/2;
+document.addEventListener('mousemove',e=>{MX=e.clientX;MY=e.clientY});
+function shake(el,n,d){const s=Math.ceil(d/.016);for(let i=0;i<s;i++){const f=Math.pow(1-i/s,1.5);gsap.set(el,{x:(Math.random()-.5)*n*f,y:(Math.random()-.5)*n*f*.6,delay:i*.016})}gsap.set(el,{x:0,y:0,delay:s*.016})}
+</script>
+
+<!-- ══════════════════════════════════════════════════════════
+     1. THE IMPOSTERS vs REVOLUTION TRADING PROS
+     Fake gurus selling garbage → RTP SMASHES through
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s1">
+<canvas class="z1" id="s1a"></canvas>
+<canvas class="z2" id="s1b"></canvas>
+<canvas class="z3" id="s1c"></canvas>
+<canvas class="z4" id="s1d"></canvas>
+<div class="F" id="s1f" style="background:radial-gradient(circle,rgba(0,255,136,.9),rgba(0,100,50,.4) 40%,transparent 65%)"></div>
+<div class="BK" id="s1bk"></div>
+<div class="C">
+  <p class="U" id="s1u0" style="color:rgba(0,255,136,.7);opacity:0;font-size:clamp(.35rem,.8vw,.5rem);letter-spacing:1em;margin-bottom:10px">WHILE THEY SELL DREAMS</p>
+  <h1 class="T" id="s1t" style="background:linear-gradient(180deg,#fff,#00ff88,#006633);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:clamp(2.2rem,7vw,6.5rem)">REVOLUTION<br>TRADING PROS</h1>
+  <p class="U" id="s1u" style="color:rgba(0,255,136,.6)">WE TEACH THE REAL GAME</p>
+  <p class="V" id="s1v" style="color:rgba(0,255,136,.35)">PURE PRICE ACTION // INSTITUTIONAL STRATEGIES<br>LEARNED ON WALL STREET // NOT FROM A YOUTUBE AD</p>
+  <p class="V" id="s1v2" style="color:rgba(0,255,136,.25);margin-top:15px;font-size:.4rem">MENTORED BY MARK McGOLDRICK — GOLDMAN SACHS</p>
+</div>
+<div class="L" id="s1l" style="color:#00ff88">01 — THE REVOLUTION</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     2. ORDER FLOW — Real bid/ask order book visualization
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s2">
+<canvas class="z1" id="s2a"></canvas><canvas class="z2" id="s2b"></canvas>
+<div class="F" id="s2f" style="background:rgba(0,255,136,.3)"></div>
+<div class="C">
+  <h1 class="T" id="s2t" style="color:#fff;text-shadow:0 0 60px rgba(0,255,136,.3)">ORDER FLOW</h1>
+  <p class="U" id="s2u" style="color:rgba(0,255,136,.5)">SEE WHERE THE REAL MONEY IS MOVING</p>
+</div>
+<div class="L" id="s2l" style="color:#00ff88">02 — THE BOOK</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     3. SMART MONEY — Institutional accumulation/distribution
+     on a chart. Wyckoff zones. Footprints.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s3">
+<canvas class="z1" id="s3a"></canvas><canvas class="z2" id="s3b"></canvas><canvas class="z3" id="s3c"></canvas>
+<div class="F" id="s3f" style="background:rgba(100,180,255,.3)"></div>
+<div class="C">
+  <h1 class="T" id="s3t" style="color:#4aa8ff;text-shadow:0 0 80px rgba(74,168,255,.4)">SMART MONEY</h1>
+  <p class="U" id="s3u" style="color:rgba(74,168,255,.5)">FOLLOW THE INSTITUTIONS. NOT THE CROWD.</p>
+</div>
+<div class="L" id="s3l" style="color:#4aa8ff">03 — ACCUMULATION</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     4. THE TAPE — Time & sales. Block trades. Volume.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s4">
+<canvas class="z1" id="s4a"></canvas><canvas class="z2" id="s4b"></canvas>
+<div class="F" id="s4f" style="background:rgba(0,255,136,.2)"></div>
+<div class="C">
+  <h1 class="T" id="s4t" style="color:#00ff88;text-shadow:0 0 60px rgba(0,255,136,.4)">THE TAPE</h1>
+  <p class="U" id="s4u" style="color:rgba(0,255,136,.4)">THE TAPE DOESN'T LIE</p>
+</div>
+<div class="L" id="s4l" style="color:#00ff88">04 — TIME & SALES</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     5. DARK POOL — Hidden institutional orders. Iceberg.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s5">
+<canvas class="z1" id="s5a"></canvas><canvas class="z2" id="s5b"></canvas>
+<div class="C">
+  <h1 class="T" id="s5t" style="color:#1a6bff;text-shadow:0 0 100px rgba(26,107,255,.5)">DARK POOL</h1>
+  <p class="U" id="s5u" style="color:rgba(26,107,255,.4)">HIDDEN LIQUIDITY. INSTITUTIONAL INTENT.</p>
+</div>
+<div class="L" id="s5l" style="color:#1a6bff">05 — OFF-EXCHANGE</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     6. PRICE ACTION — Clean chart. No indicators.
+     Just candles, structure, levels. The purest form.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s6">
+<canvas class="z1" id="s6a"></canvas><canvas class="z2" id="s6b"></canvas>
+<div class="F" id="s6f" style="background:rgba(255,255,255,.3)"></div>
+<div class="C">
+  <h1 class="T" id="s6t" style="color:#fff;text-shadow:0 0 40px rgba(255,255,255,.3)">PRICE ACTION</h1>
+  <p class="U" id="s6u" style="color:rgba(255,255,255,.4)">NO INDICATORS. NO NOISE. JUST TRUTH.</p>
+</div>
+<div class="L" id="s6l" style="color:#888">06 — PURE CHART</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     7. THE PIT — Trading floor energy. Order tickets.
+     Open outcry. Raw capitalism.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s7">
+<canvas class="z1" id="s7a"></canvas><canvas class="z2" id="s7b"></canvas>
+<div class="F" id="s7f" style="background:rgba(255,200,0,.4)"></div>
+<div class="C">
+  <h1 class="T" id="s7t" style="background:linear-gradient(180deg,#ffd700,#ff8800);-webkit-background-clip:text;background-clip:text;color:transparent">THE PIT</h1>
+  <p class="U" id="s7u" style="color:rgba(255,200,0,.5)">WHERE FORTUNES CHANGE IN SECONDS</p>
+</div>
+<div class="L" id="s7l" style="color:#ffd700">07 — OPEN OUTCRY</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     8. VOLUME PROFILE — POC, Value Area, distribution
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s8">
+<canvas class="z1" id="s8a"></canvas><canvas class="z2" id="s8b"></canvas>
+<div class="F" id="s8f" style="background:rgba(180,100,255,.3)"></div>
+<div class="C">
+  <h1 class="T" id="s8t" style="color:#b464ff;text-shadow:0 0 80px rgba(180,100,255,.4)">VOLUME PROFILE</h1>
+  <p class="U" id="s8u" style="color:rgba(180,100,255,.4)">WHERE THEY TRADED. NOT JUST WHEN.</p>
+</div>
+<div class="L" id="s8l" style="color:#b464ff">08 — AUCTION</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     9. OPTIONS FLOW — Unusual activity. Sweeps. Greeks.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s9">
+<canvas class="z1" id="s9a"></canvas><canvas class="z2" id="s9b"></canvas>
+<div class="F" id="s9f" style="background:rgba(255,0,200,.3)"></div>
+<div class="C">
+  <h1 class="T" id="s9t" style="background:linear-gradient(90deg,#ff00cc,#ff6600);-webkit-background-clip:text;background-clip:text;color:transparent">OPTIONS FLOW</h1>
+  <p class="U" id="s9u" style="color:rgba(255,0,200,.4)">FOLLOW THE UNUSUAL ACTIVITY</p>
+</div>
+<div class="L" id="s9l" style="color:#ff00cc">09 — SMART OPTIONS</div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     10. 18,000 STRONG — The community. The swarm.
+     ══════════════════════════════════════════════════════════ -->
+<section class="S" id="s10">
+<canvas class="z1" id="s10a"></canvas><canvas class="z2" id="s10b"></canvas><canvas class="z3" id="s10c"></canvas>
+<div class="F" id="s10f" style="background:rgba(0,255,136,.4)"></div>
+<div class="C">
+  <h1 class="T" id="s10t" style="background:linear-gradient(180deg,#fff,#00ff88);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:clamp(3rem,12vw,10rem)">18,000+</h1>
+  <p class="U" id="s10u" style="color:rgba(0,255,136,.5)">TRADERS. ONE MISSION. ONE EDGE.</p>
+  <p class="V" id="s10v" style="color:rgba(0,255,136,.3)">EXPLOSIVE SWINGS // REVOLUTION TRADING PROS</p>
+</div>
+<div class="L" id="s10l" style="color:#00ff88">10 — THE COMMUNITY</div>
+</section>
+<div style="height:10vh;background:#000"></div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   1. THE IMPOSTERS → RTP EMERGENCE
+   Phase 1: Fake guru garbage popups flooding screen
+   Phase 2: RTP SMASHES through like Hulk
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s1a'),document.getElementById('s1b'),document.getElementById('s1c'),document.getElementById('s1d')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,phase='fake';
+let fakePopups=[],cracks=[],shards=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const FAKE_TEXTS=[
+  '🚀 99.7% WIN RATE!!!','💰 $50K IN ONE DAY!!!','🔥 MY SECRET INDICATOR','JOIN NOW - $297/mo',
+  '⚡ AI TRADING BOT','📈 NEVER LOSE AGAIN','🎯 100% ACCURACY','💎 DIAMOND SIGNALS',
+  'FREE DISCORD (then $199)','🤑 I QUIT MY JOB','COPY MY TRADES $$$','HOLY GRAIL SYSTEM',
+  '10,000% GAINS!!!','RSI+MACD = MILLIONS','BUY MY COURSE $997','GURU MASTERCLASS',
+  'AUTOMATED PROFITS','GUARANTEED RETURNS','SECRET WALL ST HACK','NO EXPERIENCE NEEDED'
+];
+const FAKE_COLORS=['#ff3366','#ff6600','#ffcc00','#ff00ff','#00ccff','#ff4444'];
+
+function spawnFake(){
+  if(!on||phase!=='fake')return;
+  const txt=FAKE_TEXTS[Math.floor(Math.random()*FAKE_TEXTS.length)];
+  fakePopups.push({
+    x:Math.random()*(w-300)+50,y:Math.random()*(h-100)+50,
+    w:180+Math.random()*120,h:35+Math.random()*25,
+    text:txt,color:FAKE_COLORS[Math.floor(Math.random()*FAKE_COLORS.length)],
+    alpha:0,scale:0,life:1,rot:(Math.random()-.5)*.08,
+    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3
+  });
+  gsap.delayedCall(.15+Math.random()*.2,spawnFake);
+}
+
+function smash(){
+  phase='smash';
+  // Create cracks from center
+  for(let i=0;i<20;i++){
+    const a=Math.random()*Math.PI*2;
+    let pts=[];let cx2=w/2,cy2=h/2;
+    for(let j=0;j<12;j++){
+      cx2+=Math.cos(a+((Math.random()-.5)*.5))*40;
+      cy2+=Math.sin(a+((Math.random()-.5)*.5))*40;
+      pts.push({x:cx2,y:cy2});
+    }
+    cracks.push({pts,progress:0,width:Math.random()*3+1});
+  }
+  // Shatter all fake popups into shards
+  fakePopups.forEach(fp=>{
+    for(let i=0;i<6;i++){
+      const a=Math.random()*Math.PI*2,spd=5+Math.random()*10;
+      shards.push({
+        x:fp.x+fp.w/2,y:fp.y+fp.h/2,
+        vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,
+        w:fp.w/3+Math.random()*20,h:fp.h/2+Math.random()*10,
+        rot:0,rv:(Math.random()-.5)*.3,life:1,
+        color:fp.color
+      });
+    }
+  });
+  fakePopups=[];
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc,xd]=cx;
+
+  xa.fillStyle='rgba(0,0,0,.06)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);xd.clearRect(0,0,w,h);
+
+  if(phase==='fake'){
+    // Render fake guru popups
+    fakePopups.forEach(fp=>{
+      fp.alpha=Math.min(1,fp.alpha+.05);fp.scale=Math.min(1,fp.scale+.08);
+      fp.x+=fp.vx;fp.y+=fp.vy;
+      const a=fp.alpha*fp.life;
+      xb.save();xb.translate(fp.x+fp.w/2,fp.y+fp.h/2);
+      xb.rotate(fp.rot);xb.scale(fp.scale,fp.scale);
+      // Fake popup background — garish
+      xb.fillStyle=`rgba(20,20,30,${a*.9})`;
+      xb.strokeStyle=fp.color;xb.lineWidth=2;
+      xb.fillRect(-fp.w/2,-fp.h/2,fp.w,fp.h);
+      xb.strokeRect(-fp.w/2,-fp.h/2,fp.w,fp.h);
+      // Fake text
+      xb.fillStyle=fp.color;
+      xb.font=`bold ${Math.floor(fp.h*.35)}px "JetBrains Mono"`;
+      xb.textAlign='center';xb.textBaseline='middle';
+      xb.fillText(fp.text,0,0);
+      xb.textAlign='start';xb.textBaseline='alphabetic';
+      xb.restore();
+    });
+
+    // Garish background noise
+    for(let i=0;i<3;i++){
+      const gx=Math.random()*w,gy=Math.random()*h;
+      xa.fillStyle=`rgba(255,0,100,.01)`;
+      xa.fillRect(gx,gy,Math.random()*100,2);
+    }
+  }
+
+  if(phase==='smash'){
+    // GREEN energy emanating from center
+    xd.globalCompositeOperation='lighter';
+    const coreGrd=xd.createRadialGradient(w/2,h/2,0,w/2,h/2,300+t*20);
+    coreGrd.addColorStop(0,'rgba(0,255,136,.15)');
+    coreGrd.addColorStop(.5,'rgba(0,200,100,.05)');
+    coreGrd.addColorStop(1,'transparent');
+    xd.fillStyle=coreGrd;xd.fillRect(0,0,w,h);
+    xd.globalCompositeOperation='source-over';
+
+    // Cracks with green energy
+    cracks.forEach(cr=>{
+      if(cr.progress<=0)return;
+      const drawTo=Math.floor(cr.pts.length*Math.min(1,cr.progress));
+      // Glow pass
+      xc.beginPath();
+      cr.pts.slice(0,drawTo).forEach((p,i)=>{i===0?xc.moveTo(p.x,p.y):xc.lineTo(p.x,p.y)});
+      xc.strokeStyle=`rgba(0,255,136,${.3*Math.min(1,cr.progress)})`;
+      xc.lineWidth=cr.width*4;xc.shadowBlur=20;xc.shadowColor='rgba(0,255,136,.5)';xc.stroke();
+      // Core
+      xc.beginPath();
+      cr.pts.slice(0,drawTo).forEach((p,i)=>{i===0?xc.moveTo(p.x,p.y):xc.lineTo(p.x,p.y)});
+      xc.strokeStyle=`rgba(200,255,220,${.6*Math.min(1,cr.progress)})`;
+      xc.lineWidth=cr.width;xc.stroke();xc.shadowBlur=0;
+    });
+
+    // Fake popup shards flying away
+    shards.forEach(s=>{
+      s.x+=s.vx;s.y+=s.vy;s.vy+=.08;s.rot+=s.rv;s.life-=.008;
+      if(s.life>0){
+        xb.save();xb.translate(s.x,s.y);xb.rotate(s.rot);
+        xb.fillStyle=`rgba(30,30,40,${s.life*.6})`;
+        xb.strokeStyle=s.color.replace(')',`,${s.life*.3})`).replace('rgb','rgba');
+        xb.lineWidth=1;
+        xb.fillRect(-s.w/2,-s.h/2,s.w,s.h);
+        xb.restore();
+      }
+    });
+    shards=shards.filter(s=>s.life>0);
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s1',start:'top 60%',onEnter:()=>{
+  on=1;spawnFake();
+  const tl=gsap.timeline();
+  // Let fake popups build for 3.5 seconds
+  // Then SMASH
+  tl.add(()=>smash(),3.5);
+  // Screen shakes as cracks appear
+  tl.add(()=>shake('#s1 .C',40,.8),3.5);
+  // Animate cracks outward
+  tl.add(()=>{cracks.forEach((cr,i)=>{gsap.to(cr,{progress:1.2,duration:.6,delay:i*.02,ease:'power3.out'})})},3.5);
+  // GREEN flash
+  tl.to('#s1f',{opacity:1,duration:.06},3.8);
+  tl.to('#s1f',{opacity:0,duration:2,ease:'power3.out'},3.86);
+  // Black cut before title
+  tl.set('#s1bk',{opacity:1},4.3);
+  tl.to('#s1bk',{opacity:0,duration:.03},4.5);
+  // TITLE SLAM
+  tl.to('#s1u0',{opacity:1,duration:.4},4.5);
+  tl.to('#s1t',{opacity:1,duration:.5},4.8);
+  tl.from('#s1t',{scale:5,filter:'blur(30px)',duration:.5,ease:'power4.out'},4.8);
+  tl.add(()=>shake('#s1 .C',50,.8),4.8);
+  tl.to('#s1u',{opacity:1,duration:.8},5.5);
+  tl.to('#s1v',{opacity:1,duration:1},6.2);
+  tl.to('#s1v2',{opacity:1,duration:1},7);
+  tl.to('#s1l',{opacity:.15,duration:.5},5);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   2. ORDER FLOW — Live order book. Bid/ask depth.
+   Orders stacking. Pulls. Spoofs being yanked.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s2a'),document.getElementById('s2b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+let midPrice=5892.50;
+const LEVELS=40; // 20 bids, 20 asks
+let book={bids:[],asks:[]};
+function initBook(){
+  book.bids=[];book.asks=[];
+  for(let i=0;i<20;i++){
+    book.bids.push({price:midPrice-.25*(i+1),size:Math.floor(Math.random()*300+20),flash:0});
+    book.asks.push({price:midPrice+.25*(i+1),size:Math.floor(Math.random()*300+20),flash:0});
+  }
+}
+initBook();
+
+// Simulated order flow changes
+function flowTick(){
+  if(!on)return;
+  // Random size changes
+  const side=Math.random()>.5?book.bids:book.asks;
+  const lvl=side[Math.floor(Math.random()*side.length)];
+  const delta=Math.floor((Math.random()-.4)*80);
+  lvl.size=Math.max(5,lvl.size+delta);
+  if(Math.abs(delta)>40)lvl.flash=1;
+  // Occasional large block
+  if(Math.random()>.95){
+    const blockSide=Math.random()>.5?book.bids:book.asks;
+    const bl=blockSide[Math.floor(Math.random()*3)];
+    bl.size+=Math.floor(Math.random()*500+200);
+    bl.flash=1;
+  }
+  gsap.delayedCall(.05+Math.random()*.1,flowTick);
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;
+  xa.fillStyle='rgba(0,0,0,.15)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  const midX=w/2,rowH=h/LEVELS;
+  const maxSize=Math.max(...book.bids.map(b=>b.size),...book.asks.map(a=>a.size));
+
+  // Draw bids (left, green)
+  book.bids.forEach((b,i)=>{
+    const y=h/2+i*rowH;
+    const barW=(b.size/maxSize)*midX*.7;
+    b.flash*=.93;
+
+    // Bar
+    xa.fillStyle=`rgba(0,255,136,${.15+b.flash*.4})`;
+    xa.fillRect(midX-barW,y,barW,rowH-1);
+
+    // Size text
+    xb.fillStyle=`rgba(0,255,136,${.5+b.flash*.5})`;
+    xb.font='10px "JetBrains Mono"';xb.textAlign='right';
+    xb.fillText(b.size.toString(),midX-barW-8,y+rowH*.7);
+
+    // Price
+    xb.fillStyle=`rgba(0,255,136,${.3})`;xb.textAlign='left';
+    xb.fillText(b.price.toFixed(2),midX-65,y+rowH*.7);
+
+    // Flash glow
+    if(b.flash>.1){
+      xa.fillStyle=`rgba(0,255,136,${b.flash*.1})`;
+      xa.fillRect(0,y,midX,rowH);
+    }
+  });
+
+  // Draw asks (right, red)
+  book.asks.forEach((a,i)=>{
+    const y=h/2-rowH-i*rowH;
+    const barW=(a.size/maxSize)*midX*.7;
+    a.flash*=.93;
+
+    xa.fillStyle=`rgba(255,51,68,${.15+a.flash*.4})`;
+    xa.fillRect(midX,y,barW,rowH-1);
+
+    xb.fillStyle=`rgba(255,51,68,${.5+a.flash*.5})`;
+    xb.font='10px "JetBrains Mono"';xb.textAlign='left';
+    xb.fillText(a.size.toString(),midX+barW+8,y+rowH*.7);
+
+    xb.fillStyle=`rgba(255,51,68,${.3})`;xb.textAlign='right';
+    xb.fillText(a.price.toFixed(2),midX+65,y+rowH*.7);
+
+    if(a.flash>.1){
+      xa.fillStyle=`rgba(255,51,68,${a.flash*.1})`;
+      xa.fillRect(midX,y,w/2,rowH);
+    }
+  });
+  xb.textAlign='start';
+
+  // Midline + spread
+  xb.strokeStyle='rgba(255,255,255,.15)';xb.lineWidth=1;
+  xb.beginPath();xb.moveTo(midX,0);xb.lineTo(midX,h);xb.stroke();
+  xb.fillStyle='rgba(255,255,255,.6)';xb.font='bold 14px "JetBrains Mono"';
+  xb.textAlign='center';
+  xb.fillText(`${midPrice.toFixed(2)}`,midX,h/2-5);
+  xb.fillStyle='rgba(255,255,255,.2)';xb.font='8px "JetBrains Mono"';
+  xb.fillText('SPREAD: $0.25',midX,h/2+12);
+  xb.textAlign='start';
+
+  // Mouse depth indicator
+  xb.setLineDash([3,3]);xb.strokeStyle='rgba(255,255,255,.08)';
+  xb.beginPath();xb.moveTo(0,MY);xb.lineTo(w,MY);xb.stroke();
+  xb.setLineDash([]);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s2',start:'top 60%',onEnter:()=>{
+  on=1;flowTick();
+  const tl=gsap.timeline({delay:.8});
+  tl.to('#s2t',{opacity:1,duration:.5},1);tl.to('#s2u',{opacity:1,duration:.8},1.5);tl.to('#s2l',{opacity:.12,duration:.5},1);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   3. SMART MONEY — Candlestick chart with institutional
+   accumulation zone highlighted. Wyckoff-style.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s3a'),document.getElementById('s3b'),document.getElementById('s3c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,buildIdx=0;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+// Generate Wyckoff-style chart: markdown → accumulation → markup
+let candles=[],price=5950;
+// Phase A: Selling climax
+for(let i=0;i<8;i++){const o=price;price-=Math.random()*15+5;candles.push({o,c:price,h:Math.max(o,price)+Math.random()*5,l:Math.min(o,price)-Math.random()*3,bull:false,phase:'A'})}
+// Phase B: Accumulation range
+const accLow=price,accHigh=price+30;
+for(let i=0;i<20;i++){const o=price;price+=(Math.random()-.5)*12;price=Math.max(accLow-5,Math.min(accHigh+5,price));candles.push({o,c:price,h:Math.max(o,price)+Math.random()*3,l:Math.min(o,price)-Math.random()*3,bull:price>=o,phase:'B'})}
+// Phase C: Spring (dip below support)
+const o2=price;price=accLow-8;candles.push({o:o2,c:price,h:o2+2,l:price-3,bull:false,phase:'C'});
+price=accLow+5;candles.push({o:price-13,c:price,h:price+2,l:price-15,bull:true,phase:'C'});
+// Phase D-E: Markup
+for(let i=0;i<12;i++){const o=price;price+=Math.random()*15+5;candles.push({o,c:price,h:price+Math.random()*5,l:o-Math.random()*3,bull:true,phase:'D'})}
+
+// Institutional arrows
+const arrows=[{idx:7,label:'SELLING CLIMAX',color:'255,51,68'},{idx:15,label:'ACCUMULATION',color:'74,168,255'},{idx:28,label:'SPRING',color:'255,200,0'},{idx:32,label:'MARKUP BEGINS',color:'0,255,136'}];
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;
+  xa.fillStyle='rgba(0,0,0,.1)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  const vis=candles.slice(0,buildIdx);
+  if(!vis.length){requestAnimationFrame(draw);return}
+  const ps=vis.flatMap(c=>[c.h,c.l]);
+  const minP=Math.min(...ps)-5,maxP=Math.max(...ps)+5,range=maxP-minP;
+  const gap=w*.75/candles.length,cW=Math.min(gap*.6,10),offX=w*.12;
+
+  // Accumulation zone background
+  if(buildIdx>8){
+    const accTopY=h*.1+(maxP-accHigh)/range*h*.7;
+    const accBotY=h*.1+(maxP-accLow)/range*h*.7;
+    xb.fillStyle=`rgba(74,168,255,${.04+Math.sin(t*2)*.01})`;
+    xb.fillRect(offX+8*gap,accTopY,20*gap,accBotY-accTopY);
+    xb.strokeStyle='rgba(74,168,255,.15)';xb.setLineDash([4,4]);xb.lineWidth=1;
+    xb.strokeRect(offX+8*gap,accTopY,20*gap,accBotY-accTopY);
+    xb.setLineDash([]);
+    xb.fillStyle='rgba(74,168,255,.12)';xb.font='9px Orbitron';
+    xb.fillText('INSTITUTIONAL ACCUMULATION ZONE',offX+8*gap+10,accTopY-6);
+  }
+
+  // Candles
+  vis.forEach((c,idx)=>{
+    const i=candles.indexOf(c);
+    const x=offX+i*gap+gap/2;
+    const oY=h*.1+(maxP-c.o)/range*h*.7;
+    const cY=h*.1+(maxP-c.c)/range*h*.7;
+    const hY=h*.1+(maxP-c.h)/range*h*.7;
+    const lY=h*.1+(maxP-c.l)/range*h*.7;
+    const clr=c.bull?'0,255,136':'255,51,68';
+
+    xb.strokeStyle=`rgba(${clr},.5)`;xb.lineWidth=1;
+    xb.beginPath();xb.moveTo(x,hY);xb.lineTo(x,lY);xb.stroke();
+    xb.fillStyle=`rgba(${clr},.7)`;
+    xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1.5);
+
+    // Phase D glow
+    if(c.phase==='D'){
+      xb.shadowBlur=12;xb.shadowColor='rgba(0,255,136,.4)';
+      xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1.5);
+      xb.shadowBlur=0;
+    }
+  });
+
+  // Arrows/labels
+  arrows.forEach(ar=>{
+    if(buildIdx<=ar.idx)return;
+    const c=candles[ar.idx];
+    const x=offX+ar.idx*gap+gap/2;
+    const y=h*.1+(maxP-c.l)/range*h*.7+25;
+    xc.fillStyle=`rgba(${ar.color},.5)`;
+    xc.font='bold 8px "JetBrains Mono"';
+    xc.textAlign='center';xc.fillText(ar.label,x,y);
+    // Arrow
+    xc.beginPath();xc.moveTo(x,y-18);xc.lineTo(x,y-8);
+    xc.strokeStyle=`rgba(${ar.color},.4)`;xc.lineWidth=1.5;xc.stroke();
+    xc.textAlign='start';
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s3',start:'top 60%',onEnter:()=>{
+  on=1;
+  // Build chart candle by candle
+  const total=candles.length;
+  candles.forEach((c,i)=>{
+    const d=i<8?i*.08:i<28?8*.08+(i-8)*.06:28*.06+(i-28)*.04;
+    gsap.delayedCall(d,()=>{buildIdx=i+1});
+  });
+  const endTime=28*.06+12*.04+.5;
+  const tl=gsap.timeline();
+  tl.to('#s3f',{opacity:.3,duration:.05},endTime);tl.to('#s3f',{opacity:0,duration:1},endTime+.05);
+  tl.to('#s3t',{opacity:1,duration:.5},endTime);
+  tl.from('#s3t',{scale:2,filter:'blur(15px)',duration:.5,ease:'power4.out'},endTime);
+  tl.add(()=>shake('#s3 .C',15,.3),endTime);
+  tl.to('#s3u',{opacity:1,duration:1},endTime+.5);
+  tl.to('#s3l',{opacity:.12,duration:.5},endTime+.3);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   4. THE TAPE — Time & sales waterfall with block detection
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s4a'),document.getElementById('s4b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,entries=[],blocks=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const SYMS=['ES','NQ','SPX','AAPL','TSLA','NVDA','AMZN','MSFT'];
+function addEntry(){
+  if(!on)return;
+  const isBlock=Math.random()>.93;
+  const sym=SYMS[Math.floor(Math.random()*SYMS.length)];
+  const size=isBlock?Math.floor(Math.random()*5000+500):Math.floor(Math.random()*100+1);
+  const price=(5890+Math.random()*20).toFixed(2);
+  const side=Math.random()>.5;
+  const col=Math.floor(Math.random()*4);
+  entries.push({col,sym,price,size,side,y:-25,speed:3+Math.random()*4,isBlock,alpha:isBlock?1:.5});
+  if(isBlock) blocks.push({y:0,alpha:.4,time:t});
+  gsap.delayedCall(isBlock?.3:.02+Math.random()*.03,addEntry);
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.01;
+  const[xa,xb]=cx;
+  xa.fillStyle='rgba(0,0,0,.1)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  // Column headers
+  xb.fillStyle='rgba(255,255,255,.1)';xb.font='8px Orbitron';
+  ['SYMBOL','PRICE','SIZE','SIDE'].forEach((h2,i)=>{xb.fillText(h2,w*.15+i*w*.18,20)});
+  // Separator
+  xb.strokeStyle='rgba(255,255,255,.05)';xb.beginPath();xb.moveTo(w*.1,28);xb.lineTo(w*.9,28);xb.stroke();
+
+  // Entries falling
+  entries.forEach(e=>{
+    e.y+=e.speed;
+    const baseX=w*.15;const y=e.y+30;
+    const clr=e.side?'0,255,136':'255,51,68';
+    const sz=e.isBlock?'bold 12':'10';
+
+    // Block highlight row
+    if(e.isBlock&&e.y>0){
+      xa.fillStyle=`rgba(${clr},${Math.max(0,(.5-e.y/h)*.08)})`;
+      xa.fillRect(w*.08,y-8,w*.84,16);
+    }
+
+    xb.font=`${sz}px "JetBrains Mono"`;
+    xb.fillStyle=`rgba(${clr},${e.alpha*(1-e.y/(h*1.5))})`;
+    xb.fillText(e.sym,baseX,y);
+    xb.fillText(e.price,baseX+w*.18,y);
+    xb.fillText(e.size.toLocaleString(),baseX+w*.36,y);
+    xb.fillText(e.side?'BID':'ASK',baseX+w*.54,y);
+
+    if(e.isBlock){
+      xb.fillStyle=`rgba(255,255,100,${(1-e.y/(h*1.5))*.6})`;
+      xb.shadowBlur=6;xb.shadowColor='rgba(255,255,100,.3)';
+      xb.fillText('■ BLOCK',baseX+w*.65,y);xb.shadowBlur=0;
+    }
+  });
+  entries=entries.filter(e=>e.y<h);
+
+  // Block trade shockwave lines
+  blocks.forEach(b=>{
+    b.alpha*=.97;b.y+=6;
+    xa.strokeStyle=`rgba(255,255,100,${b.alpha})`;xa.lineWidth=.5;
+    xa.beginPath();xa.moveTo(w*.08,b.y);xa.lineTo(w*.92,b.y);xa.stroke();
+  });
+  blocks=blocks.filter(b=>b.alpha>.01);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s4',start:'top 60%',onEnter:()=>{
+  on=1;addEntry();
+  const tl=gsap.timeline({delay:1});
+  tl.to('#s4t',{opacity:1,duration:.5},1);tl.to('#s4u',{opacity:1,duration:.8},1.5);tl.to('#s4l',{opacity:.12,duration:.5},1);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   5. DARK POOL — Sonar reveals hidden institutional orders
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s5a'),document.getElementById('s5b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,rings=[],icebergs=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+for(let i=0;i<12;i++){
+  icebergs.push({
+    x:w*.15+Math.random()*w*.7,y:h*.15+Math.random()*h*.7,
+    visibleSize:Math.random()*15+5,hiddenSize:Math.random()*80+40,
+    volume:Math.floor(Math.random()*80000+10000),
+    side:Math.random()>.5?'BID':'ASK',revealed:0
+  });
+}
+
+let particles=[];
+for(let i=0;i<200;i++) particles.push({x:Math.random()*2000,y:Math.random()*1200,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,s:Math.random()*1.5+.3});
+
+function ping(){
+  if(!on)return;
+  rings.push({x:MX,y:MY,r:0,a:.5});
+  icebergs.forEach(ice=>{
+    if(Math.hypot(ice.x-MX,ice.y-MY)<300)
+      gsap.to(ice,{revealed:Math.min(1,ice.revealed+.25),duration:.8,ease:'power2.out'});
+  });
+  gsap.delayedCall(2.5,ping);
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.006;
+  const[xa,xb]=cx;
+  xa.fillStyle='rgba(0,3,8,.05)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  // Ambient particles
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+    xa.beginPath();xa.arc(p.x/2000*w,p.y/1200*h,p.s,0,Math.PI*2);
+    xa.fillStyle='rgba(26,107,255,.08)';xa.fill();
+  });
+
+  // Sonar rings
+  rings.forEach(r=>{
+    r.r+=4;r.a*=.97;
+    xb.beginPath();xb.arc(r.x,r.y,r.r,0,Math.PI*2);
+    xb.strokeStyle=`rgba(26,107,255,${r.a})`;xb.lineWidth=2;xb.stroke();
+  });
+  rings=rings.filter(r=>r.a>.01);
+
+  // Icebergs
+  icebergs.forEach(ice=>{
+    if(ice.revealed<.02)return;
+    const a=ice.revealed;
+    const clr=ice.side==='BID'?'0,200,136':'200,80,100';
+
+    // Visible tip (always somewhat there)
+    xb.fillStyle=`rgba(${clr},${.15+a*.2})`;
+    xb.fillRect(ice.x-ice.visibleSize/2,ice.y-ice.visibleSize/4,ice.visibleSize,ice.visibleSize/2);
+
+    // Hidden body (revealed by sonar)
+    xb.fillStyle=`rgba(${clr},${a*.12})`;
+    xb.fillRect(ice.x-ice.hiddenSize/2*a,ice.y+ice.visibleSize/4,ice.hiddenSize*a,ice.hiddenSize*.6*a);
+    xb.strokeStyle=`rgba(${clr},${a*.2})`;xb.lineWidth=1;
+    xb.strokeRect(ice.x-ice.hiddenSize/2*a,ice.y+ice.visibleSize/4,ice.hiddenSize*a,ice.hiddenSize*.6*a);
+
+    // Volume label
+    xb.fillStyle=`rgba(${clr},${a*.6})`;xb.font='bold 9px "JetBrains Mono"';
+    xb.textAlign='center';
+    xb.fillText(`${ice.side} ${ice.volume.toLocaleString()}`,ice.x,ice.y+ice.hiddenSize*.3*a+ice.visibleSize);
+    xb.fillStyle=`rgba(${clr},${a*.3})`;xb.font='7px "JetBrains Mono"';
+    xb.fillText('HIDDEN ORDER',ice.x,ice.y+ice.hiddenSize*.3*a+ice.visibleSize+12);
+    xb.textAlign='start';
+
+    // Glow
+    const grd=xb.createRadialGradient(ice.x,ice.y,0,ice.x,ice.y,ice.hiddenSize*a);
+    grd.addColorStop(0,`rgba(26,107,255,${a*.04})`);grd.addColorStop(1,'transparent');
+    xb.fillStyle=grd;xb.fillRect(ice.x-ice.hiddenSize*a,ice.y-ice.hiddenSize*a,ice.hiddenSize*2*a,ice.hiddenSize*2*a);
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s5',start:'top 60%',onEnter:()=>{
+  on=1;ping();
+  const tl=gsap.timeline({delay:1});
+  tl.to('#s5t',{opacity:1,duration:.8},2);tl.to('#s5u',{opacity:1,duration:1},2.8);tl.to('#s5l',{opacity:.12,duration:.5},2);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   6. PRICE ACTION — Clean chart building. Key levels.
+   Support/resistance. Trendlines. No indicators.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s6a'),document.getElementById('s6b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,buildIdx=0;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+let candles=[],price=5870;
+// Uptrend with pullbacks: higher highs, higher lows
+const swingPoints=[];
+for(let i=0;i<45;i++){
+  const o=price;
+  if(i%8<5){price+=Math.random()*6+1}else{price-=Math.random()*8+2}
+  const c=price;
+  candles.push({o,c,h:Math.max(o,c)+Math.random()*4,l:Math.min(o,c)-Math.random()*4,bull:c>=o});
+  if(i%8===4)swingPoints.push({idx:i,type:'high',price:Math.max(o,c)});
+  if(i%8===7)swingPoints.push({idx:i,type:'low',price:Math.min(o,c)});
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;
+  xa.clearRect(0,0,w,h);xb.clearRect(0,0,w,h);
+
+  // Dark grid
+  xa.strokeStyle='rgba(255,255,255,.02)';xa.lineWidth=.5;
+  for(let x=0;x<w;x+=w/20){xa.beginPath();xa.moveTo(x,0);xa.lineTo(x,h);xa.stroke()}
+  for(let y=0;y<h;y+=h/12){xa.beginPath();xa.moveTo(0,y);xa.lineTo(w,y);xa.stroke()}
+
+  const vis=candles.slice(0,buildIdx);
+  if(!vis.length){requestAnimationFrame(draw);return}
+  const ps=vis.flatMap(c=>[c.h,c.l]);
+  const minP=Math.min(...ps)-8,maxP=Math.max(...ps)+8,range=maxP-minP;
+  const gap=w*.8/candles.length,cW=Math.min(gap*.55,9),offX=w*.1;
+
+  // Candles — clean, crisp
+  vis.forEach((c,idx)=>{
+    const i=candles.indexOf(c);
+    const x=offX+i*gap+gap/2;
+    const oY=h*.08+(maxP-c.o)/range*h*.8;
+    const cY=h*.08+(maxP-c.c)/range*h*.8;
+    const hY=h*.08+(maxP-c.h)/range*h*.8;
+    const lY=h*.08+(maxP-c.l)/range*h*.8;
+
+    // Wick
+    xb.strokeStyle=c.bull?'rgba(0,255,136,.6)':'rgba(255,51,68,.6)';xb.lineWidth=1;
+    xb.beginPath();xb.moveTo(x,hY);xb.lineTo(x,lY);xb.stroke();
+    // Body
+    xb.fillStyle=c.bull?'rgba(0,255,136,.8)':'rgba(255,51,68,.8)';
+    xb.fillRect(x-cW/2,Math.min(oY,cY),cW,Math.abs(cY-oY)||1.5);
+  });
+
+  // Trendline connecting swing lows (if enough built)
+  const lows=swingPoints.filter(s=>s.type==='low'&&s.idx<buildIdx);
+  if(lows.length>=2){
+    xb.beginPath();
+    lows.forEach((s,i)=>{
+      const x=offX+s.idx*gap+gap/2;
+      const y=h*.08+(maxP-s.price)/range*h*.8;
+      i===0?xb.moveTo(x,y):xb.lineTo(x,y);
+    });
+    xb.strokeStyle='rgba(0,255,136,.2)';xb.lineWidth=1.5;xb.setLineDash([6,3]);xb.stroke();xb.setLineDash([]);
+  }
+
+  // Higher high / higher low labels
+  swingPoints.forEach(s=>{
+    if(s.idx>=buildIdx)return;
+    const x=offX+s.idx*gap+gap/2;
+    const y=h*.08+(maxP-s.price)/range*h*.8;
+    xb.fillStyle=s.type==='high'?'rgba(0,255,136,.25)':'rgba(255,200,50,.25)';
+    xb.font='7px "JetBrains Mono"';xb.textAlign='center';
+    xb.fillText(s.type==='high'?'HH':'HL',x,s.type==='high'?y-10:y+14);
+    // Dot
+    xb.beginPath();xb.arc(x,y,3,0,Math.PI*2);
+    xb.fillStyle=s.type==='high'?'rgba(0,255,136,.3)':'rgba(255,200,50,.3)';xb.fill();
+    xb.textAlign='start';
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s6',start:'top 60%',onEnter:()=>{
+  on=1;
+  candles.forEach((c,i)=>{gsap.delayedCall(i*.06,()=>{buildIdx=i+1})});
+  const endT=candles.length*.06+.3;
+  const tl=gsap.timeline();
+  tl.to('#s6f',{opacity:.2,duration:.05},endT);tl.to('#s6f',{opacity:0,duration:1},endT+.05);
+  tl.to('#s6t',{opacity:1,duration:.5},endT);tl.to('#s6u',{opacity:1,duration:1},endT+.5);tl.to('#s6l',{opacity:.12,duration:.5},endT+.2);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   7. THE PIT — Trading floor. Order tickets flying.
+   Price shouts. Crowd energy.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s7a'),document.getElementById('s7b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const ORDERS=['ES BUY 50','NQ SELL 20','SPX CALL 100','ES BUY 200','FILL 5892.50','NQ BUY 75','SELL SELL SELL','BUY THE DIP','FILLED @ MKT','ES 5893 BID'];
+let tickets=[];
+for(let i=0;i<200;i++){
+  const a=Math.random()*Math.PI*2,spd=Math.random()*3+.5;
+  tickets.push({
+    x:Math.random()*2000,y:Math.random()*1200,
+    vx:Math.cos(a)*spd,vy:Math.sin(a)*spd,
+    text:ORDERS[Math.floor(Math.random()*ORDERS.length)],
+    size:6+Math.random()*6,alpha:Math.random()*.25+.05,
+    rot:(Math.random()-.5)*.4,
+    color:Math.random()>.5?'0,255,136':'255,51,68'
+  });
+}
+
+// Price shout waveform
+let wave=new Array(150).fill(0);
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;
+
+  // Heat energy
+  xa.fillStyle='rgba(0,0,0,.04)';xa.fillRect(0,0,w,h);
+  const mc=Math.floor(MX/30),mr=Math.floor(MY/30);
+  for(let dr=-3;dr<=3;dr++)for(let dc=-3;dc<=3;dc++){
+    const d=Math.sqrt(dr*dr+dc*dc);if(d>3)continue;
+    xa.fillStyle=`rgba(255,${Math.floor(150+d*20)},0,${(1-d/3)*.03})`;
+    xa.fillRect((mc+dc)*30,(mr+dr)*30,30,30);
+  }
+
+  // Order tickets
+  xb.clearRect(0,0,w,h);
+  tickets.forEach(tk=>{
+    const dx=MX-tk.x,dy=MY-tk.y,dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<150){tk.vx-=(dx/dist)*1.5;tk.vy-=(dy/dist)*1.5}
+    tk.vx+=(Math.random()-.5)*.15;tk.vy+=(Math.random()-.5)*.15;
+    tk.vx*=.99;tk.vy*=.99;
+    tk.x+=tk.vx;tk.y+=tk.vy;
+    if(tk.x<-100)tk.x=w+100;if(tk.x>w+100)tk.x=-100;
+    if(tk.y<-50)tk.y=h+50;if(tk.y>h+50)tk.y=-50;
+    xb.save();xb.translate(tk.x,tk.y);xb.rotate(tk.rot+Math.sin(t+tk.x*.01)*.05);
+    xb.font=`${tk.size}px "JetBrains Mono"`;
+    xb.fillStyle=`rgba(${tk.color},${tk.alpha})`;
+    xb.fillText(tk.text,0,0);xb.restore();
+  });
+
+  // Waveform at bottom (open outcry audio)
+  wave.shift();wave.push(Math.sin(t*15)*25+Math.sin(t*23)*15+(Math.random()-.5)*40);
+  xa.beginPath();
+  wave.forEach((v,i)=>{const px=i/wave.length*w;i===0?xa.moveTo(px,h*.88+v):xa.lineTo(px,h*.88+v)});
+  xa.strokeStyle='rgba(255,200,0,.12)';xa.lineWidth=1.5;
+  xa.shadowBlur=8;xa.shadowColor='rgba(255,200,0,.2)';xa.stroke();xa.shadowBlur=0;
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s7',start:'top 60%',onEnter:()=>{
+  on=1;
+  const tl=gsap.timeline({delay:.5});
+  tl.to('#s7f',{opacity:.3,duration:.05},.5);tl.to('#s7f',{opacity:0,duration:.8},.55);
+  tl.to('#s7t',{opacity:1,duration:.5},1);tl.add(()=>shake('#s7 .C',15,.3),1);
+  tl.to('#s7u',{opacity:1,duration:.8},1.5);tl.to('#s7l',{opacity:.12,duration:.5},1);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   8. VOLUME PROFILE — POC, Value Area, histogram bars
+   building from the side of a chart
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s8a'),document.getElementById('s8b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,profileBars=[],buildProgress={v:0};
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+// Generate volume profile — bell-curve-ish distribution
+const ROWS=50;
+const poc=25; // Point of Control row
+for(let i=0;i<ROWS;i++){
+  const distFromPOC=Math.abs(i-poc);
+  const vol=Math.exp(-distFromPOC*distFromPOC/80)*100+Math.random()*15;
+  profileBars.push({volume:vol,isPOC:i===poc,inVA:distFromPOC<10});
+}
+const maxVol=Math.max(...profileBars.map(b=>b.volume));
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;
+  xa.fillStyle='rgba(0,0,0,.1)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  const prog=buildProgress.v;
+  const barH=h/ROWS;
+  const startX=w*.15;
+
+  profileBars.forEach((bar,i)=>{
+    const y=i*barH;
+    const barW=(bar.volume/maxVol)*w*.5*prog;
+
+    // Value Area fill
+    if(bar.inVA){
+      xa.fillStyle='rgba(180,100,255,.03)';
+      xa.fillRect(startX,y,w*.5,barH);
+    }
+
+    // Volume bar
+    const alpha=bar.isPOC?.8:.3+bar.volume/maxVol*.3;
+    xb.fillStyle=bar.isPOC?`rgba(255,200,50,${alpha*prog})`:`rgba(180,100,255,${alpha*prog})`;
+    xb.fillRect(startX,y+1,barW,barH-2);
+
+    // POC glow
+    if(bar.isPOC&&prog>.5){
+      xb.shadowBlur=15;xb.shadowColor='rgba(255,200,50,.4)';
+      xb.fillRect(startX,y+1,barW,barH-2);xb.shadowBlur=0;
+      // POC label
+      xb.fillStyle=`rgba(255,200,50,${prog*.6})`;xb.font='bold 9px "JetBrains Mono"';
+      xb.fillText('◄ POC',startX+barW+8,y+barH*.7);
+    }
+
+    // Price labels on right
+    if(i%5===0){
+      const price=5850+i*2;
+      xb.fillStyle='rgba(180,100,255,.15)';xb.font='8px "JetBrains Mono"';
+      xb.textAlign='right';xb.fillText(price.toFixed(2),startX-8,y+barH*.7);xb.textAlign='start';
+    }
+  });
+
+  // Value Area labels
+  if(prog>.5){
+    const vaTop=15*barH,vaBot=35*barH;
+    xb.setLineDash([3,3]);xb.strokeStyle='rgba(180,100,255,.15)';
+    xb.beginPath();xb.moveTo(startX,vaTop);xb.lineTo(w*.7,vaTop);xb.stroke();
+    xb.beginPath();xb.moveTo(startX,vaBot);xb.lineTo(w*.7,vaBot);xb.stroke();
+    xb.setLineDash([]);
+    xb.fillStyle='rgba(180,100,255,.2)';xb.font='8px Orbitron';
+    xb.fillText('VALUE AREA HIGH',w*.72,vaTop+4);
+    xb.fillText('VALUE AREA LOW',w*.72,vaBot+4);
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s8',start:'top 60%',onEnter:()=>{
+  on=1;
+  gsap.to(buildProgress,{v:1,duration:3,ease:'power2.out'});
+  const tl=gsap.timeline({delay:2.5});
+  tl.to('#s8f',{opacity:.2,duration:.05},0);tl.to('#s8f',{opacity:0,duration:1},.05);
+  tl.to('#s8t',{opacity:1,duration:.5},.3);tl.to('#s8u',{opacity:1,duration:.8},.8);tl.to('#s8l',{opacity:.12,duration:.5},.5);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   9. OPTIONS FLOW — Unusual activity scanner.
+   Call/put sweeps appearing. Premium amounts. Greeks.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s9a'),document.getElementById('s9b')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,flows=[];
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+const TICKERS=['SPX','AAPL','TSLA','NVDA','AMZN','META','MSFT','GOOGL','AMD','QQQ'];
+function addFlow(){
+  if(!on)return;
+  const isCall=Math.random()>.35;
+  const isSweep=Math.random()>.7;
+  const ticker=TICKERS[Math.floor(Math.random()*TICKERS.length)];
+  const strike=Math.floor(Math.random()*50+150);
+  const premium=Math.floor(Math.random()*2000+50);
+  const size=Math.floor(Math.random()*500+10);
+  const exp=`${Math.floor(Math.random()*12+1)}/${Math.floor(Math.random()*28+1)}`;
+
+  flows.push({
+    ticker,strike,premium,size,isCall,isSweep,exp,
+    y:-35,speed:2+Math.random()*3,alpha:0
+  });
+  gsap.delayedCall(.3+Math.random()*.5,addFlow);
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb]=cx;
+  xa.fillStyle='rgba(0,0,0,.08)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);
+
+  // Header
+  xb.fillStyle='rgba(255,255,255,.1)';xb.font='8px Orbitron';
+  const headers=['TICKER','STRIKE','EXP','C/P','SIZE','PREMIUM','TYPE'];
+  headers.forEach((h2,i)=>{xb.fillText(h2,w*.08+i*w*.12,20)});
+  xb.strokeStyle='rgba(255,255,255,.05)';xb.beginPath();xb.moveTo(w*.05,28);xb.lineTo(w*.95,28);xb.stroke();
+
+  flows.forEach(f=>{
+    f.y+=f.speed;f.alpha=Math.min(1,f.alpha+.06);
+    const y=f.y+35;
+    const fade=f.alpha*(1-Math.max(0,(f.y-h*.7)/(h*.3)));
+    const clr=f.isCall?'0,255,136':'255,0,200';
+    const baseX=w*.08;
+
+    // Row highlight for sweeps
+    if(f.isSweep){
+      xa.fillStyle=`rgba(${clr},${fade*.04})`;
+      xa.fillRect(w*.05,y-10,w*.9,18);
+    }
+
+    xb.font=`${f.isSweep?'bold ':''}10px "JetBrains Mono"`;
+    xb.fillStyle=`rgba(255,255,255,${fade*.5})`;
+    xb.fillText(f.ticker,baseX,y);
+    xb.fillText(`$${f.strike}`,baseX+w*.12,y);
+    xb.fillText(f.exp,baseX+w*.24,y);
+    xb.fillStyle=`rgba(${clr},${fade*.7})`;
+    xb.fillText(f.isCall?'CALL':'PUT',baseX+w*.36,y);
+    xb.fillStyle=`rgba(255,255,255,${fade*.5})`;
+    xb.fillText(f.size.toString(),baseX+w*.48,y);
+    xb.fillText(`$${f.premium.toLocaleString()}K`,baseX+w*.6,y);
+
+    if(f.isSweep){
+      xb.fillStyle=`rgba(255,255,100,${fade*.7})`;
+      xb.shadowBlur=4;xb.shadowColor='rgba(255,255,100,.3)';
+      xb.fillText('⚡ SWEEP',baseX+w*.72,y);xb.shadowBlur=0;
+    }
+  });
+  flows=flows.filter(f=>f.y<h);
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s9',start:'top 60%',onEnter:()=>{
+  on=1;addFlow();
+  const tl=gsap.timeline({delay:1});
+  tl.to('#s9f',{opacity:.15,duration:.05},.5);tl.to('#s9f',{opacity:0,duration:.8},.55);
+  tl.to('#s9t',{opacity:1,duration:.5},1);tl.to('#s9u',{opacity:1,duration:.8},1.5);tl.to('#s9l',{opacity:.12,duration:.5},1);
+}});
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   10. 18,000 STRONG — Particles forming the number 18,000
+   then rippling outward. Community swarm.
+   ═══════════════════════════════════════════════════════════ */
+;(function(){
+const cv=[document.getElementById('s10a'),document.getElementById('s10b'),document.getElementById('s10c')];
+const cx=cv.map(c=>c.getContext('2d'));
+let w,h,t=0,on=0,pts=[],formed=false;
+function rs(){cv.forEach(c=>{c.width=W();c.height=H()});w=W();h=H()}
+rs();addEventListener('resize',rs);
+
+function getTextPts(text,size){
+  const tc=document.createElement('canvas');tc.width=w;tc.height=h;
+  const tx=tc.getContext('2d');
+  tx.font=`900 ${size}px Anton`;tx.textAlign='center';tx.textBaseline='middle';
+  tx.fillStyle='#fff';tx.fillText(text,w/2,h/2);
+  const d=tx.getImageData(0,0,w,h).data;
+  const p=[];const step=5;
+  for(let y=0;y<h;y+=step)for(let x=0;x<w;x+=step){
+    if(d[(y*w+x)*4+3]>128)p.push({x,y});
+  }
+  return p;
+}
+
+let targets=[];
+function init(){
+  targets=getTextPts('18,000+',Math.min(w*.2,180));
+  pts=[];
+  const count=Math.min(targets.length,2000);
+  for(let i=0;i<count;i++){
+    pts.push({
+      x:Math.random()*w,y:Math.random()*h,
+      tx:targets[i].x,ty:targets[i].y,
+      vx:0,vy:0,size:Math.random()*2.5+.5,
+      hue:130+Math.random()*30
+    });
+  }
+}
+
+function draw(){
+  if(!on){requestAnimationFrame(draw);return}
+  t+=.008;
+  const[xa,xb,xc]=cx;
+  xa.fillStyle='rgba(0,0,0,.1)';xa.fillRect(0,0,w,h);
+  xb.clearRect(0,0,w,h);xc.clearRect(0,0,w,h);
+
+  pts.forEach(p=>{
+    // Mouse repulsion
+    const mdx=p.x-MX,mdy=p.y-MY,md=Math.sqrt(mdx*mdx+mdy*mdy);
+    if(md<100){p.vx+=(mdx/md)*6;p.vy+=(mdy/md)*6}
+    if(formed){p.vx+=(p.tx-p.x)*.06;p.vy+=(p.ty-p.y)*.06}
+    p.vx*=.88;p.vy*=.88;p.x+=p.vx;p.y+=p.vy;
+
+    const spd=Math.sqrt(p.vx*p.vx+p.vy*p.vy);
+    xa.beginPath();xa.arc(p.x,p.y,p.size,0,Math.PI*2);
+    xa.fillStyle=`hsla(${p.hue},100%,60%,${.3+Math.min(spd*.05,.6)})`;
+    if(spd>2){xa.shadowBlur=4;xa.shadowColor=`hsla(${p.hue},100%,50%,.3)`}
+    xa.fill();xa.shadowBlur=0;
+  });
+
+  // Connection web near text
+  if(formed){
+    for(let i=0;i<pts.length;i+=3){
+      for(let j=i+1;j<pts.length;j+=3){
+        const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y;
+        if(dx*dx+dy*dy<600){
+          xb.beginPath();xb.moveTo(pts[i].x,pts[i].y);xb.lineTo(pts[j].x,pts[j].y);
+          xb.strokeStyle='rgba(0,255,136,.04)';xb.lineWidth=.5;xb.stroke();
+        }
+      }
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+
+ScrollTrigger.create({trigger:'#s10',start:'top 60%',onEnter:()=>{
+  on=1;init();
+  gsap.delayedCall(.5,()=>{formed=true});
+  const tl=gsap.timeline({delay:3.5});
+  tl.to('#s10f',{opacity:.2,duration:.05},0);tl.to('#s10f',{opacity:0,duration:1},.05);
+  tl.to('#s10t',{opacity:1,duration:.5},.3);
+  tl.from('#s10t',{scale:3,filter:'blur(20px)',duration:.5,ease:'power4.out'},.3);
+  tl.add(()=>shake('#s10 .C',20,.4),.3);
+  tl.to('#s10u',{opacity:1,duration:1},1);
+  tl.to('#s10v',{opacity:1,duration:1},1.8);
+  tl.to('#s10l',{opacity:.15,duration:.5},.5);
+}});
+})();
+</script>
+</body>
+</html>
